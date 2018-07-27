@@ -15,19 +15,85 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            debuggable true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+ext {
+    junitVersion = '4.12'
+    daggerVersion = '2.14.1'
+    rxJavaVersion = '2.1.1'
+    rxAndroidVersion = '2.0.1'
+    retrofitVersion = '2.3.0'
+    okHttpVersion = '3.4.1'
+    espressoVersion = '3.0.1'
+    mockitoVersion = '1.10.19'
+    runnerVersion = '1.0.1'
+    gsonVersion = '2.8.2'
+    moxyVersion = '1.5.3'
+    powermockVersion = '1.6.6'
+    mockwebserverVersion = '3.10.0'
+    timberVersion = '4.7.0'
+
+    //android-support
+    appcompatVersion = '27.1.1'
+    constraintVersion = '1.1.2'
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    //test
+    testImplementation "junit:junit:$junitVersion"
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
+    androidTestImplementation "com.android.support.test:runner:$runnerVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
+    testImplementation "org.powermock:powermock-module-junit4:$powermockVersion"
+    testImplementation "org.powermock:powermock-module-junit4-rule:$powermockVersion"
+    testImplementation "org.powermock:powermock-api-mockito:$powermockVersion"
+    testImplementation "org.powermock:powermock-classloading-xstream:$powermockVersion"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$mockwebserverVersion"
+
+    //dagger2
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+    testAnnotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+    androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    //rxjava2
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+
+    //retrofit&OkHttp
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+    implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    //moxy
+    implementation "com.arello-mobile:moxy:$moxyVersion"
+    implementation "com.arello-mobile:moxy-app-compat:$moxyVersion"
+    annotationProcessor "com.arello-mobile:moxy-compiler:$moxyVersion"
+
+    //other
+    implementation "com.google.code.gson:gson:$gsonVersion"
+    implementation "com.jakewharton.timber:timber:$timberVersion"
+
+    //android-support
+    implementation "com.android.support:appcompat-v7:$appcompatVersion"
+    implementation "com.android.support.constraint:constraint-layout:$constraintVersion"
+    implementation "com.android.support:design:$appcompatVersion"
+    implementation "com.android.support:support-v4:$appcompatVersion"
+    implementation "com.android.support:recyclerview-v7:$appcompatVersion"
 }
