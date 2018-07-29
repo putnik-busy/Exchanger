@@ -3,14 +3,20 @@ package com.demo.justapp.exchanger.models.local;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.demo.justapp.exchanger.di.scope.Data;
+
+import javax.inject.Inject;
+
 /**
  * @author Sergey Rodionov
  */
+@Data
 public class Rate implements Parcelable {
 
     private String mCurrency;
     private double mRateExchange;
 
+    @Inject
     public Rate() {
         //необходим для Parcelable
     }
@@ -36,16 +42,18 @@ public class Rate implements Parcelable {
         return mCurrency;
     }
 
-    public void setCurrency(String currency) {
+    public Rate setCurrency(String currency) {
         mCurrency = currency;
+        return this;
     }
 
     public double getRateExchange() {
         return mRateExchange;
     }
 
-    public void setRateExchange(double rateExchange) {
+    public Rate setRateExchange(double rateExchange) {
         mRateExchange = rateExchange;
+        return this;
     }
 
     @Override

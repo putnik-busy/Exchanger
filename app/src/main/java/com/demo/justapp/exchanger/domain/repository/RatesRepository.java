@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.demo.justapp.exchanger.models.local.RatesModel;
 
-import io.reactivex.Single;
+import io.reactivex.Observable;
 
 /**
  * Репозиторий, предоставляющий операции над курсами валют
@@ -19,5 +19,5 @@ public interface RatesRepository {
      * @param rate выбранная валюта
      * @return информация о курсах валют
      */
-    Single<RatesModel> loadRates(@NonNull String rate);
+    Observable<RatesModel> loadRates(@NonNull String rate);
 }

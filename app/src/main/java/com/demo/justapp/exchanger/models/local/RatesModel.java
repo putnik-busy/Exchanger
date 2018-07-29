@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class RatesModel implements Parcelable {
 
-    private String mDefaultCurrency = "EUR";
+    private String mDefaultCurrency;
     private List<Rate> mRates;
 
     public RatesModel() {

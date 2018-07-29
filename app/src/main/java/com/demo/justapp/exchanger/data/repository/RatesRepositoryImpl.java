@@ -7,7 +7,7 @@ import com.demo.justapp.exchanger.data.network.RestApi;
 import com.demo.justapp.exchanger.domain.repository.RatesRepository;
 import com.demo.justapp.exchanger.models.local.RatesModel;
 
-import io.reactivex.Single;
+import io.reactivex.Observable;
 
 /**
  * Реализация {@link RatesRepository}
@@ -35,7 +35,7 @@ public class RatesRepositoryImpl implements RatesRepository {
      * {@inheritDoc}
      */
     @Override
-    public Single<RatesModel> loadRates(@NonNull String rate) {
+    public Observable<RatesModel> loadRates(@NonNull String rate) {
         return mRestApi.getRates(rate)
                 .map(mRatesConverter::convert);
     }

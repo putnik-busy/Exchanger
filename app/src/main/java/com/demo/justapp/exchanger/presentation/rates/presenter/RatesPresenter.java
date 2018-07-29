@@ -6,15 +6,16 @@ import com.arellomobile.mvp.InjectViewState;
 import com.demo.justapp.exchanger.R;
 import com.demo.justapp.exchanger.di.scope.Data;
 import com.demo.justapp.exchanger.domain.RatesInteractor;
-import com.demo.justapp.exchanger.models.local.Rate;
 import com.demo.justapp.exchanger.presentation.base.BasePresenter;
 import com.demo.justapp.exchanger.presentation.rates.view.RatesView;
 import com.demo.justapp.exchanger.presentation.resources.ResourceManager;
 import com.demo.justapp.exchanger.rx.RxSchedulers;
 
-import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
+
+import io.reactivex.Observable;
 
 /**
  * @author Sergey Rodionov
@@ -53,26 +54,25 @@ public class RatesPresenter extends BasePresenter<RatesView> {
      * Загружает фото пользователя
      */
     public void loadRates() {
-        getRxCompositeDisposable().add(mRatesInteractor
-                .loadRates("EUR")
-                .repeat(1000L)
-                .subscribeOn(mRxSchedulers.getIOScheduler())
-                .observeOn(mRxSchedulers.getMainThreadScheduler())
-                .doOnSubscribe(disposable -> getViewState().showProgress(true))
-                .doAfterTerminate(() -> getViewState().showProgress(false))
-                .subscribe(
-                        ratesModel -> {
-                            List<Rate> rates = ratesModel.getRates();
-                            if (rates.isEmpty()) {
-                                getViewState().showStub();
-                            } else {
-                                getViewState().showRates(rates);
-                            }
-                        },
-                        throwable -> {
-                            String textError = mResourceManager.getString(R.string.error_load_text);
-                            getViewState().showStub();
-                            getViewState().showErrorMessage(textError);
-                        }));
+        getRxCompositeDisposable().add(
+                Observable.interval(1, TimeUnit.SECONDS)
+                        .flatMap(it -> mRatesInteractor.loadRates())
+                        .subscribeOn(mRxSchedulers.getIOScheduler())
+                        .observeOn(mRxSchedulers.getMainThreadScheduler())
+                        .doOnSubscribe(disposable -> getViewState().showProgress(true))
+                        .doAfterTerminate(() -> getViewState().showProgress(false))
+                        .subscribe(
+                                rates -> {
+                                    if (rates.isEmpty()) {
+                                        getViewState().showStub();
+                                    } else {
+                                        getViewState().showRates(rates);
+                                    }
+                                },
+                                throwable -> {
+                                    String textError = mResourceManager.getString(R.string.error_load_text);
+                                    getViewState().showStub();
+                                    getViewState().showErrorMessage(textError);
+                                }));
     }
 }

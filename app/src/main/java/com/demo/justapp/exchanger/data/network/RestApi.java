@@ -2,7 +2,7 @@ package com.demo.justapp.exchanger.data.network;
 
 import com.demo.justapp.exchanger.models.remote.RatesResponse;
 
-import io.reactivex.Single;
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -18,5 +18,5 @@ public interface RestApi {
      * @return возвращает список курсов валют
      */
     @GET("latest")
-    Single<RatesResponse> getRates(@Query("base") String defaultCurrency);
+    Observable<RatesResponse> getRates(@Query("base") String defaultCurrency);
 }
