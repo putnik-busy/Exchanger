@@ -44,7 +44,7 @@ public class RatesViewHolder extends RecyclerView.ViewHolder implements View.OnC
      */
     @Override
     public void onClick(View v) {
-        if (mRecyclerViewItemListener != null) {
+        if (mRecyclerViewItemListener != null && getAdapterPosition() != RecyclerView.NO_POSITION) {
             mRecyclerViewItemListener.onItemClick(this, getAdapterPosition(), getItemViewType());
         }
     }

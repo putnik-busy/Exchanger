@@ -66,4 +66,33 @@ public class Rate implements Parcelable {
         dest.writeString(mCurrency);
         dest.writeDouble(mRateExchange);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Rate rate = (Rate) o;
+
+        if (Double.compare(rate.mRateExchange, mRateExchange) != 0) return false;
+        return mCurrency != null ? mCurrency.equals(rate.mCurrency) : rate.mCurrency == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = mCurrency != null ? mCurrency.hashCode() : 0;
+        temp = Double.doubleToLongBits(mRateExchange);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Rate{" +
+                "mCurrency='" + mCurrency + '\'' +
+                ", mRateExchange=" + mRateExchange +
+                '}';
+    }
 }

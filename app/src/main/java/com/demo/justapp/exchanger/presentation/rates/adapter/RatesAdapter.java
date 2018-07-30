@@ -1,6 +1,7 @@
 package com.demo.justapp.exchanger.presentation.rates.adapter;
 
 import android.support.annotation.NonNull;
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +9,9 @@ import android.view.ViewGroup;
 
 import com.demo.justapp.exchanger.R;
 import com.demo.justapp.exchanger.models.local.Rate;
+import com.demo.justapp.exchanger.presentation.rates.adapter.util.CurrencyRateAdapterDiffUtil;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -69,15 +70,19 @@ public class RatesAdapter extends RecyclerView.Adapter<RatesViewHolder> {
      * @param rates список, содержащий информацию о курсах валют
      */
     public void addRates(@NonNull List<Rate> rates) {
+        final CurrencyRateAdapterDiffUtil diffCallback = new CurrencyRateAdapterDiffUtil(mRates, rates);
+        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
+
         mRates.clear();
         mRates.addAll(rates);
-        notifyDataSetChanged();
+        diffResult.dispatchUpdatesTo(this);
     }
 
     public void updateRate(int position) {
         Rate item = mRates.get(position);
         mRates.remove(position);
         mRates.add(0, item);
+        //  notifyDataSetChanged();
         notifyItemMoved(position, 0);
     }
 
