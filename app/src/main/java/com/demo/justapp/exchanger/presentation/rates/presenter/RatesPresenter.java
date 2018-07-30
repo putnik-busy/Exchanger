@@ -6,6 +6,7 @@ import com.arellomobile.mvp.InjectViewState;
 import com.demo.justapp.exchanger.R;
 import com.demo.justapp.exchanger.di.scope.Data;
 import com.demo.justapp.exchanger.domain.RatesInteractor;
+import com.demo.justapp.exchanger.models.local.Rate;
 import com.demo.justapp.exchanger.presentation.base.BasePresenter;
 import com.demo.justapp.exchanger.presentation.rates.view.RatesView;
 import com.demo.justapp.exchanger.presentation.resources.ResourceManager;
@@ -55,14 +56,15 @@ public class RatesPresenter extends BasePresenter<RatesView> {
      */
     public void loadRates() {
         getRxCompositeDisposable().add(
-                Observable.interval(1, TimeUnit.SECONDS)
+                Observable.interval(1, 100000, TimeUnit.SECONDS)
                         .flatMap(it -> mRatesInteractor.loadRates())
                         .subscribeOn(mRxSchedulers.getIOScheduler())
                         .observeOn(mRxSchedulers.getMainThreadScheduler())
-                        .doOnSubscribe(disposable -> getViewState().showProgress(true))
-                        .doAfterTerminate(() -> getViewState().showProgress(false))
+                        .doOnSubscribe(__ -> getViewState().showProgress(true))
                         .subscribe(
                                 rates -> {
+                                    getViewState().showProgress(false);
+
                                     if (rates.isEmpty()) {
                                         getViewState().showStub();
                                     } else {
@@ -74,5 +76,9 @@ public class RatesPresenter extends BasePresenter<RatesView> {
                                     getViewState().showStub();
                                     getViewState().showErrorMessage(textError);
                                 }));
+    }
+
+    public void updateCurrentCurrency(@NonNull Rate rate) {
+        mRatesInteractor.updateCurrentCurrency(rate);
     }
 }

@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.demo.justapp.exchanger.R;
 import com.demo.justapp.exchanger.models.local.Rate;
 
-import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 /**
  * Холдер для ленты фото
@@ -56,6 +56,7 @@ public class RatesViewHolder extends RecyclerView.ViewHolder implements View.OnC
      */
     void bindView(Rate rate) {
         mRateNameTextView.setText(rate.getCurrency());
-        mRateAmountEditText.setText(String.valueOf(rate.getRateExchange()));
+        String formatValue = new DecimalFormat("##.##").format(rate.getRateExchange());
+        mRateAmountEditText.setText(formatValue);
     }
 }

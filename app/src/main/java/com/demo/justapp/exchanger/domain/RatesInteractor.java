@@ -46,8 +46,8 @@ public class RatesInteractor {
     public Observable<List<Rate>> loadRates() {
         return mRatesRepository.loadRates(mRate.getCurrency())
                 .flatMapIterable((Function<RatesModel, Iterable<Rate>>) RatesModel::getRates)
-                .startWith(mRate)
                 .map(rate1 -> rate1.setRateExchange(rate1.getRateExchange() * mRate.getRateExchange()))
+                .startWith(mRate)
                 .toList()
                 .toObservable();
     }

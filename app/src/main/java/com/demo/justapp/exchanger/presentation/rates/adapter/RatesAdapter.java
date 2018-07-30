@@ -10,7 +10,11 @@ import com.demo.justapp.exchanger.R;
 import com.demo.justapp.exchanger.models.local.Rate;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
+
+import static android.os.Debug.waitForDebugger;
 
 /**
  * Адаптер для курсов валют
@@ -20,7 +24,7 @@ import java.util.List;
 public class RatesAdapter extends RecyclerView.Adapter<RatesViewHolder> {
 
     private final RecyclerViewItemListener mRecyclerViewItemListener;
-    private final List<Rate> mRates;
+    private final LinkedList<Rate> mRates;
 
     /**
      * Констурктор для {@link RatesAdapter}
@@ -29,7 +33,7 @@ public class RatesAdapter extends RecyclerView.Adapter<RatesViewHolder> {
      */
     public RatesAdapter(@NonNull RecyclerViewItemListener recyclerViewItemListener) {
         mRecyclerViewItemListener = recyclerViewItemListener;
-        mRates = new ArrayList<>();
+        mRates = new LinkedList<>();
     }
 
     /**
@@ -70,10 +74,17 @@ public class RatesAdapter extends RecyclerView.Adapter<RatesViewHolder> {
         notifyDataSetChanged();
     }
 
+    public void updateRate(int position) {
+        Rate item = mRates.get(position);
+        mRates.remove(position);
+        mRates.add(0, item);
+        notifyItemMoved(position, 0);
+    }
+
     /**
      * @return возвращает курсы валют
      */
     public List<Rate> getRates() {
-        return mRates;
+        return new ArrayList<>(mRates);
     }
 }

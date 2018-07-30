@@ -135,6 +135,8 @@ public class RatesFragment extends BaseFragment implements RatesView, RecyclerVi
     @Override
     public void onItemClick(RecyclerView.ViewHolder sender, int adapterPosition, int viewType) {
         Rate rate = mRatesAdapter.getRates().get(adapterPosition);
+        mRatesAdapter.updateRate(adapterPosition);
+        mRatesPresenter.updateCurrentCurrency(rate);
     }
 
     /**
