@@ -11,7 +11,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.SingleSource;
 import io.reactivex.functions.Function;
 
 /**
@@ -43,13 +44,12 @@ public class RatesInteractor {
      *
      * @return список курсов валют
      */
-    public Observable<List<Rate>> loadRates() {
+    public Single<List<Rate>> loadRates() {
         return mRatesRepository.loadRates(mRate.getCurrency())
-                .flatMapIterable((Function<RatesModel, Iterable<Rate>>) RatesModel::getRates)
+                .flattenAsObservable((Function<RatesModel, Iterable<Rate>>) RatesModel::getRates)
                 .map(rate1 -> rate1.setRateExchange(rate1.getRateExchange() * mRate.getRateExchange()))
                 .startWith(mRate)
-                .toList()
-                .toObservable();
+                .toList();
     }
 
     public void updateCurrentCurrency(@NonNull Rate rate) {

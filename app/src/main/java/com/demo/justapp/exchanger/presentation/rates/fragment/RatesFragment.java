@@ -137,6 +137,7 @@ public class RatesFragment extends BaseFragment implements RatesView, RecyclerVi
         Rate rate = mRatesAdapter.getRates().get(adapterPosition);
         mRatesAdapter.updateRate(adapterPosition);
         mRatesPresenter.updateCurrentCurrency(rate);
+        mRecyclerView.scrollToPosition(0);
     }
 
     /**

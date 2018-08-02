@@ -2,6 +2,8 @@ package com.demo.justapp.exchanger.presentation.rates.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -11,6 +13,7 @@ import com.demo.justapp.exchanger.R;
 import com.demo.justapp.exchanger.models.local.Rate;
 
 import java.text.DecimalFormat;
+import java.util.Currency;
 
 /**
  * Холдер для ленты фото
@@ -36,6 +39,7 @@ public class RatesViewHolder extends RecyclerView.ViewHolder implements View.OnC
         ViewGroup itemContainer = itemView.findViewById(R.id.item_container);
         mRateNameTextView = itemView.findViewById(R.id.rate_name_text_view);
         mRateAmountEditText = itemView.findViewById(R.id.rate_amount_edit_text);
+        mRateAmountEditText.addTextChangedListener(new CurrencyTextWatcher());
         itemContainer.setOnClickListener(this);
     }
 
@@ -59,4 +63,30 @@ public class RatesViewHolder extends RecyclerView.ViewHolder implements View.OnC
         String formatValue = new DecimalFormat("##.##").format(rate.getRateExchange());
         mRateAmountEditText.setText(formatValue);
     }
+
+    private  final class CurrencyTextWatcher implements TextWatcher {
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if (mRateAmountEditText.isFocused()) {
+                try {
+                  float   enteredAmount = Float.valueOf(s.toString());
+                } catch (NumberFormatException ex) {
+
+                }
+
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    }
+
 }

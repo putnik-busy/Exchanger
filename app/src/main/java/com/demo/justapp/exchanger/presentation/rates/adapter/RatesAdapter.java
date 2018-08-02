@@ -12,10 +12,9 @@ import com.demo.justapp.exchanger.models.local.Rate;
 import com.demo.justapp.exchanger.presentation.rates.adapter.util.CurrencyRateAdapterDiffUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-
-import static android.os.Debug.waitForDebugger;
 
 /**
  * Адаптер для курсов валют
@@ -79,10 +78,7 @@ public class RatesAdapter extends RecyclerView.Adapter<RatesViewHolder> {
     }
 
     public void updateRate(int position) {
-        Rate item = mRates.get(position);
-        mRates.remove(position);
-        mRates.add(0, item);
-        //  notifyDataSetChanged();
+        Collections.swap(mRates, position, 0);
         notifyItemMoved(position, 0);
     }
 

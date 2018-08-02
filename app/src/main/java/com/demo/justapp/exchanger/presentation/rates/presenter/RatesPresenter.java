@@ -16,8 +16,6 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
-
 /**
  * @author Sergey Rodionov
  */
@@ -55,27 +53,26 @@ public class RatesPresenter extends BasePresenter<RatesView> {
      * Загружает фото пользователя
      */
     public void loadRates() {
-        getRxCompositeDisposable().add(
-                Observable.interval(1, 100000, TimeUnit.SECONDS)
-                        .flatMap(it -> mRatesInteractor.loadRates())
-                        .subscribeOn(mRxSchedulers.getIOScheduler())
-                        .observeOn(mRxSchedulers.getMainThreadScheduler())
-                        .doOnSubscribe(__ -> getViewState().showProgress(true))
-                        .subscribe(
-                                rates -> {
-                                    getViewState().showProgress(false);
+        getRxCompositeDisposable().add(mRatesInteractor.loadRates()
+                .delay(1, TimeUnit.SECONDS)
+                .subscribeOn(mRxSchedulers.getIOScheduler())
+                .observeOn(mRxSchedulers.getMainThreadScheduler())
+                .doOnSubscribe(__ -> getViewState().showProgress(true))
+                .subscribe(
+                        rates -> {
+                            getViewState().showProgress(false);
 
-                                    if (rates.isEmpty()) {
-                                        getViewState().showStub();
-                                    } else {
-                                        getViewState().showRates(rates);
-                                    }
-                                },
-                                throwable -> {
-                                    String textError = mResourceManager.getString(R.string.error_load_text);
-                                    getViewState().showStub();
-                                    getViewState().showErrorMessage(textError);
-                                }));
+                            if (rates.isEmpty()) {
+                                getViewState().showStub();
+                            } else {
+                                getViewState().showRates(rates);
+                            }
+                        },
+                        throwable -> {
+                            String textError = mResourceManager.getString(R.string.error_load_text);
+                            getViewState().showStub();
+                            getViewState().showErrorMessage(textError);
+                        }));
     }
 
     public void updateCurrentCurrency(@NonNull Rate rate) {

@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 
 import com.demo.justapp.exchanger.models.local.Rate;
-import com.demo.justapp.exchanger.presentation.rates.adapter.RatesViewHolder;
 
 import java.util.List;
 
@@ -17,8 +16,6 @@ public class CurrencyRateAdapterDiffUtil extends DiffUtil.Callback {
     private List<Rate> mNewList;
 
     /**
-     * Стандартный конструктор
-     *
      * @param oldList старый лист с данными
      * @param newList новый лист с данными
      */
