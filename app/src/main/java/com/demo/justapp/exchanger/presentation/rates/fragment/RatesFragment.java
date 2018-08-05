@@ -16,8 +16,9 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.demo.justapp.exchanger.R;
 import com.demo.justapp.exchanger.di.data.DataComponent;
-import com.demo.justapp.exchanger.models.local.Rate;
+import com.demo.justapp.exchanger.models.local.CurrencyRate;
 import com.demo.justapp.exchanger.presentation.base.BaseFragment;
+import com.demo.justapp.exchanger.presentation.rates.adapter.AmountChangedListener;
 import com.demo.justapp.exchanger.presentation.rates.adapter.RatesAdapter;
 import com.demo.justapp.exchanger.presentation.rates.adapter.RecyclerViewItemListener;
 import com.demo.justapp.exchanger.presentation.rates.presenter.RatesPresenter;
@@ -32,7 +33,8 @@ import javax.inject.Inject;
  *
  * @author Sergey Rodionov
  */
-public class RatesFragment extends BaseFragment implements RatesView, RecyclerViewItemListener {
+public class RatesFragment extends BaseFragment
+        implements RatesView, RecyclerViewItemListener, AmountChangedListener {
 
     public static final String TAG = "RatesFragment";
     private RecyclerView mRecyclerView;
@@ -108,8 +110,13 @@ public class RatesFragment extends BaseFragment implements RatesView, RecyclerVi
      * @param list
      */
     @Override
-    public void showRates(@NonNull List<Rate> list) {
+    public void showRates(@NonNull List<CurrencyRate> list) {
         mRatesAdapter.addRates(list);
+    }
+
+    @Override
+    public void updateRates(@NonNull List<CurrencyRate> list) {
+        mRatesAdapter.updateRates(list);
     }
 
     /**
@@ -133,11 +140,18 @@ public class RatesFragment extends BaseFragment implements RatesView, RecyclerVi
      * {@inheritDoc}
      */
     @Override
-    public void onItemClick(RecyclerView.ViewHolder sender, int adapterPosition, int viewType) {
-        Rate rate = mRatesAdapter.getRates().get(adapterPosition);
-        mRatesAdapter.updateRate(adapterPosition);
-        mRatesPresenter.updateCurrentCurrency(rate);
-        mRecyclerView.scrollToPosition(0);
+    public void onItemClick(int adapterPosition, int viewType) {
+        CurrencyRate rate = mRatesAdapter.getRates().get(adapterPosition);
+        mRatesPresenter.onChangeDefaultCurrency(rate.getCurrency());
+        mRatesAdapter.changeDefaultRate(adapterPosition);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void amountChanged(double amount) {
+        mRatesPresenter.onChangeAmountCurrency(mRatesAdapter.getRates(), amount);
     }
 
     /**
@@ -157,9 +171,9 @@ public class RatesFragment extends BaseFragment implements RatesView, RecyclerVi
     }
 
     private void prepareAdapter() {
-        mRatesAdapter = new RatesAdapter(this);
+        mRatesAdapter = new RatesAdapter(this, this);
         mRecyclerView.setAdapter(mRatesAdapter);
+        mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
-
 }

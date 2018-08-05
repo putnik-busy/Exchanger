@@ -5,52 +5,45 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.demo.justapp.exchanger.R;
-import com.demo.justapp.exchanger.models.local.Rate;
+import com.demo.justapp.exchanger.models.local.CurrencyRate;
 
 import java.text.DecimalFormat;
-import java.util.Currency;
 
 /**
- * Холдер для ленты фото
+ * Холдер для список валют
  *
  * @author Sergey Rodionov
  */
-public class RatesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class RatesViewHolder extends RecyclerView.ViewHolder {
 
     private final RecyclerViewItemListener mRecyclerViewItemListener;
+    private final AmountChangedListener mAmountChangedListener;
     private TextView mRateNameTextView;
     private EditText mRateAmountEditText;
 
     /**
-     * Констурктор для {@link RatesViewHolder}
-     *
      * @param itemView                 вью элемента списка
      * @param recyclerViewItemListener листенер событий клика по элементу
      */
     RatesViewHolder(@NonNull View itemView,
-                    @NonNull RecyclerViewItemListener recyclerViewItemListener) {
+                    @NonNull RecyclerViewItemListener recyclerViewItemListener,
+                    @NonNull AmountChangedListener amountChangedListener) {
         super(itemView);
         mRecyclerViewItemListener = recyclerViewItemListener;
-        ViewGroup itemContainer = itemView.findViewById(R.id.item_container);
+        mAmountChangedListener = amountChangedListener;
         mRateNameTextView = itemView.findViewById(R.id.rate_name_text_view);
         mRateAmountEditText = itemView.findViewById(R.id.rate_amount_edit_text);
         mRateAmountEditText.addTextChangedListener(new CurrencyTextWatcher());
-        itemContainer.setOnClickListener(this);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void onClick(View v) {
-        if (mRecyclerViewItemListener != null && getAdapterPosition() != RecyclerView.NO_POSITION) {
-            mRecyclerViewItemListener.onItemClick(this, getAdapterPosition(), getItemViewType());
-        }
+        mRateAmountEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus
+                    && getAdapterPosition() > RecyclerView.TOUCH_SLOP_DEFAULT) {
+                mRecyclerViewItemListener.onItemClick(getAdapterPosition(), getItemViewType());
+            }
+        });
     }
 
     /**
@@ -58,13 +51,15 @@ public class RatesViewHolder extends RecyclerView.ViewHolder implements View.OnC
      *
      * @param rate модель, содержащая информация о фото
      */
-    void bindView(Rate rate) {
-        mRateNameTextView.setText(rate.getCurrency());
-        String formatValue = new DecimalFormat("##.##").format(rate.getRateExchange());
-        mRateAmountEditText.setText(formatValue);
+    void bindView(CurrencyRate rate) {
+        if (!mRateAmountEditText.isFocused()) {
+            mRateNameTextView.setText(rate.getCurrency());
+            String formatValue = new DecimalFormat("##.##").format(rate.getRateExchange());
+            mRateAmountEditText.setText(formatValue);
+        }
     }
 
-    private  final class CurrencyTextWatcher implements TextWatcher {
+    private final class CurrencyTextWatcher implements TextWatcher {
 
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -74,12 +69,13 @@ public class RatesViewHolder extends RecyclerView.ViewHolder implements View.OnC
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if (mRateAmountEditText.isFocused()) {
+                double amount;
                 try {
-                  float   enteredAmount = Float.valueOf(s.toString());
-                } catch (NumberFormatException ex) {
-
+                    amount = Double.valueOf(s.toString());
+                } catch (NumberFormatException e) {
+                    amount = 0;
                 }
-
+                mAmountChangedListener.amountChanged(amount);
             }
         }
 

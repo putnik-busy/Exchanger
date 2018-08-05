@@ -11,30 +11,30 @@ import javax.inject.Inject;
  * @author Sergey Rodionov
  */
 @Data
-public class Rate implements Parcelable {
+public class CurrencyRate implements Parcelable {
 
     private String mCurrency;
     private double mRateExchange;
 
     @Inject
-    public Rate() {
+    public CurrencyRate() {
         //необходим для Parcelable
     }
 
-    public Rate(Parcel in) {
+    public CurrencyRate(Parcel in) {
         mCurrency = in.readString();
         mRateExchange = in.readDouble();
     }
 
-    public static final Creator<Rate> CREATOR = new Creator<Rate>() {
+    public static final Creator<CurrencyRate> CREATOR = new Creator<CurrencyRate>() {
         @Override
-        public Rate createFromParcel(Parcel in) {
-            return new Rate(in);
+        public CurrencyRate createFromParcel(Parcel in) {
+            return new CurrencyRate(in);
         }
 
         @Override
-        public Rate[] newArray(int size) {
-            return new Rate[size];
+        public CurrencyRate[] newArray(int size) {
+            return new CurrencyRate[size];
         }
     };
 
@@ -42,7 +42,7 @@ public class Rate implements Parcelable {
         return mCurrency;
     }
 
-    public Rate setCurrency(String currency) {
+    public CurrencyRate setCurrency(String currency) {
         mCurrency = currency;
         return this;
     }
@@ -51,7 +51,7 @@ public class Rate implements Parcelable {
         return mRateExchange;
     }
 
-    public Rate setRateExchange(double rateExchange) {
+    public CurrencyRate setRateExchange(double rateExchange) {
         mRateExchange = rateExchange;
         return this;
     }
@@ -72,7 +72,7 @@ public class Rate implements Parcelable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Rate rate = (Rate) o;
+        CurrencyRate rate = (CurrencyRate) o;
 
         if (Double.compare(rate.mRateExchange, mRateExchange) != 0) return false;
         return mCurrency != null ? mCurrency.equals(rate.mCurrency) : rate.mCurrency == null;
@@ -90,7 +90,7 @@ public class Rate implements Parcelable {
 
     @Override
     public String toString() {
-        return "Rate{" +
+        return "CurrencyRate{" +
                 "mCurrency='" + mCurrency + '\'' +
                 ", mRateExchange=" + mRateExchange +
                 '}';

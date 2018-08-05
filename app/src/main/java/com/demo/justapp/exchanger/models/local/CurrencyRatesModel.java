@@ -10,16 +10,16 @@ import java.util.List;
  *
  * @author Sergey Rodionov
  */
-public class RatesModel implements Parcelable {
+public class CurrencyRatesModel implements Parcelable {
 
     private String mDefaultCurrency;
-    private List<Rate> mRates;
+    private List<CurrencyRate> mRates;
 
-    public RatesModel() {
+    public CurrencyRatesModel() {
         //необходим для Parcelable
     }
 
-    public RatesModel(Parcel in) {
+    public CurrencyRatesModel(Parcel in) {
         mDefaultCurrency = in.readString();
     }
 
@@ -33,15 +33,15 @@ public class RatesModel implements Parcelable {
         return 0;
     }
 
-    public static final Creator<RatesModel> CREATOR = new Creator<RatesModel>() {
+    public static final Creator<CurrencyRatesModel> CREATOR = new Creator<CurrencyRatesModel>() {
         @Override
-        public RatesModel createFromParcel(Parcel in) {
-            return new RatesModel(in);
+        public CurrencyRatesModel createFromParcel(Parcel in) {
+            return new CurrencyRatesModel(in);
         }
 
         @Override
-        public RatesModel[] newArray(int size) {
-            return new RatesModel[size];
+        public CurrencyRatesModel[] newArray(int size) {
+            return new CurrencyRatesModel[size];
         }
     };
 
@@ -53,11 +53,11 @@ public class RatesModel implements Parcelable {
         mDefaultCurrency = defaultCurrency;
     }
 
-    public List<Rate> getRates() {
+    public List<CurrencyRate> getRates() {
         return mRates;
     }
 
-    public void setRates(List<Rate> rates) {
+    public void setRates(List<CurrencyRate> rates) {
         mRates = rates;
     }
 
@@ -70,7 +70,7 @@ public class RatesModel implements Parcelable {
             return false;
         }
 
-        RatesModel that = (RatesModel) o;
+        CurrencyRatesModel that = (CurrencyRatesModel) o;
 
         if (mDefaultCurrency != null ? !mDefaultCurrency.equals(that.mDefaultCurrency) : that.mDefaultCurrency != null) {
             return false;
@@ -87,7 +87,7 @@ public class RatesModel implements Parcelable {
 
     @Override
     public String toString() {
-        return "RatesModel{" +
+        return "CurrencyRatesModel{" +
                 "mDefaultCurrency='" + mDefaultCurrency + '\'' +
                 ", mRates=" + mRates +
                 '}';

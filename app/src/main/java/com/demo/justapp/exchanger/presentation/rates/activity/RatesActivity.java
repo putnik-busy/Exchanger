@@ -34,6 +34,7 @@ public class RatesActivity extends AppCompatActivity implements HasComponent<Dat
         setContentView(R.layout.activity_container);
         setupToolBar();
         initFragment();
+
     }
 
     /**

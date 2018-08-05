@@ -12,9 +12,8 @@ public interface RecyclerViewItemListener {
     /**
      * Слушатель клика по item
      *
-     * @param sender          вьюходер
      * @param adapterPosition позиция клика
      * @param viewType        тип вью
      */
-    void onItemClick(RecyclerView.ViewHolder sender, int adapterPosition, int viewType);
+    void onItemClick(int adapterPosition, int viewType);
 }

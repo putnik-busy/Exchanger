@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import com.demo.justapp.exchanger.data.converter.RatesConverter;
 import com.demo.justapp.exchanger.data.network.RestApi;
 import com.demo.justapp.exchanger.domain.repository.RatesRepository;
-import com.demo.justapp.exchanger.models.local.RatesModel;
+import com.demo.justapp.exchanger.models.local.CurrencyRatesModel;
 
 import io.reactivex.Single;
 
@@ -35,7 +35,7 @@ public class RatesRepositoryImpl implements RatesRepository {
      * {@inheritDoc}
      */
     @Override
-    public Single<RatesModel> loadRates(@NonNull String rate) {
+    public Single<CurrencyRatesModel> loadRates(@NonNull String rate) {
         return mRestApi.getRates(rate)
                 .map(mRatesConverter::convert);
     }

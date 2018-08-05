@@ -4,15 +4,14 @@ import android.support.annotation.NonNull;
 
 import com.demo.justapp.exchanger.di.scope.Data;
 import com.demo.justapp.exchanger.domain.repository.RatesRepository;
-import com.demo.justapp.exchanger.models.local.Rate;
-import com.demo.justapp.exchanger.models.local.RatesModel;
+import com.demo.justapp.exchanger.models.local.CurrencyRate;
+import com.demo.justapp.exchanger.models.local.CurrencyRatesModel;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
 import io.reactivex.Single;
-import io.reactivex.SingleSource;
 import io.reactivex.functions.Function;
 
 /**
@@ -24,7 +23,6 @@ import io.reactivex.functions.Function;
 public class RatesInteractor {
 
     private final RatesRepository mRatesRepository;
-    private final Rate mRate;
 
     /**
      * Конструктор для {@link RatesInteractor}
@@ -32,11 +30,8 @@ public class RatesInteractor {
      * @param ratesRepository репозиторий, для работы с курсами валют
      */
     @Inject
-    public RatesInteractor(@NonNull RatesRepository ratesRepository,
-                           @NonNull Rate rate) {
+    public RatesInteractor(@NonNull RatesRepository ratesRepository) {
         mRatesRepository = ratesRepository;
-        mRate = rate;
-        mRate.setCurrency("EUR").setRateExchange(100);
     }
 
     /**
@@ -44,16 +39,10 @@ public class RatesInteractor {
      *
      * @return список курсов валют
      */
-    public Single<List<Rate>> loadRates() {
-        return mRatesRepository.loadRates(mRate.getCurrency())
-                .flattenAsObservable((Function<RatesModel, Iterable<Rate>>) RatesModel::getRates)
-                .map(rate1 -> rate1.setRateExchange(rate1.getRateExchange() * mRate.getRateExchange()))
-                .startWith(mRate)
+    public Single<List<CurrencyRate>> loadRates(@NonNull String currency) {
+        return mRatesRepository.loadRates(currency)
+                .flattenAsObservable((Function<CurrencyRatesModel, Iterable<CurrencyRate>>) CurrencyRatesModel::getRates)
                 .toList();
     }
 
-    public void updateCurrentCurrency(@NonNull Rate rate) {
-        mRate.setRateExchange(rate.getRateExchange())
-                .setCurrency(rate.getCurrency());
-    }
 }

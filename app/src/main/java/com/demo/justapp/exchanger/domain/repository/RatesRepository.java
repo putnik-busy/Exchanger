@@ -2,9 +2,8 @@ package com.demo.justapp.exchanger.domain.repository;
 
 import android.support.annotation.NonNull;
 
-import com.demo.justapp.exchanger.models.local.RatesModel;
+import com.demo.justapp.exchanger.models.local.CurrencyRatesModel;
 
-import io.reactivex.Observable;
 import io.reactivex.Single;
 
 /**
@@ -20,5 +19,5 @@ public interface RatesRepository {
      * @param rate выбранная валюта
      * @return информация о курсах валют
      */
-    Single<RatesModel> loadRates(@NonNull String rate);
+    Single<CurrencyRatesModel> loadRates(@NonNull String rate);
 }

@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
-import com.demo.justapp.exchanger.models.local.Rate;
+import com.demo.justapp.exchanger.models.local.CurrencyRate;
 import com.demo.justapp.exchanger.presentation.base.BaseView;
 
 import java.util.List;
@@ -23,7 +23,9 @@ public interface RatesView extends BaseView {
      *
      * @param list список валют для отображения
      */
-    void showRates(@NonNull List<Rate> list);
+    void showRates(@NonNull List<CurrencyRate> list);
+
+    void updateRates(@NonNull List<CurrencyRate> list);
 
     /**
      * Показать прогресс загрузки
