@@ -6,6 +6,7 @@ import com.arellomobile.mvp.InjectViewState;
 import com.demo.justapp.exchanger.R;
 import com.demo.justapp.exchanger.di.scope.Data;
 import com.demo.justapp.exchanger.domain.RatesInteractor;
+import com.demo.justapp.exchanger.models.local.CurrencyRate;
 import com.demo.justapp.exchanger.presentation.base.BasePresenter;
 import com.demo.justapp.exchanger.presentation.rates.view.RatesView;
 import com.demo.justapp.exchanger.presentation.resources.ResourceManager;
@@ -48,7 +49,9 @@ public class RatesPresenter extends BasePresenter<RatesView> {
         mRatesInteractor = ratesInteractor;
         mRxSchedulers = rxSchedulers;
         mResourceManager = resourceManager;
-        mRate = rate.setCurrency("EUR").setRateExchange(100);
+        rate.setCurrency("EUR");
+        rate.setRate(100d);
+        mRate = rate;
     }
 
     @Override
@@ -58,11 +61,11 @@ public class RatesPresenter extends BasePresenter<RatesView> {
     }
 
     public void onChangeAmountCurrency(@NonNull List<CurrencyRate> rates, double amount) {
-        mRate.setRateExchange(amount);
+        mRate.setRate(amount);
         int count = rates.size();
         for (int i = 1; i < count; i++) {
             CurrencyRate rate = rates.get(i);
-            rate.setRateExchange(formattingCurrencyRate(rate.getRateExchange()));
+            rate.setRate(formattingCurrencyRate(rate.getRate()));
         }
         getViewState().updateRates(rates);
     }
@@ -80,17 +83,20 @@ public class RatesPresenter extends BasePresenter<RatesView> {
                 .subscribeOn(mRxSchedulers.getIOScheduler())
                 .observeOn(mRxSchedulers.getMainThreadScheduler())
                 .doOnSubscribe(__ -> getViewState().showProgress(true))
-                .flatMapSingle(elements ->
+                .flatMapSingle((List<CurrencyRate> elements) ->
                         fromIterable(elements)
-                                .map(element -> element.setRateExchange(
-                                        formattingCurrencyRate(element.getRateExchange())))
+                                .map(element -> {
+                                    element.setRate(
+                                            formattingCurrencyRate(element.getRate()));
+                                    return element;
+                                })
                                 .startWith(mRate)
                                 .toList())
                 .subscribe(getSuccessConsumerLoadRates(), getErrorConsumerLoadRates()));
     }
 
     private double formattingCurrencyRate(double amount) {
-        return valueOf(amount).multiply(valueOf(mRate.getRateExchange())).doubleValue();
+        return valueOf(amount).multiply(valueOf(mRate.getRate())).doubleValue();
     }
 
     private Consumer<List<CurrencyRate>> getSuccessConsumerLoadRates() {

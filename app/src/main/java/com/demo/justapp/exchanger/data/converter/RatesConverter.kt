@@ -23,9 +23,7 @@ class RatesConverter @Inject constructor()
         currencyRatesModel.defaultCurrency = from.base
 
         for (entry in from.rates.entries) {
-            val rate = CurrencyRate()
-            rate.currency = entry.key
-            rate.rateExchange = entry.value
+            val rate = CurrencyRate(entry.key, entry.value)
             rates.add(rate)
         }
 

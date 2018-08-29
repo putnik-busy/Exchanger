@@ -8,7 +8,8 @@ import android.os.Parcelable
  *
  * @author Sergey Rodionov
  */
-data class CurrencyRatesModel(var defaultCurrency: String, var rates: List<CurrencyRate>) : Parcelable {
+data class CurrencyRatesModel(var defaultCurrency: String = "",
+                              var rates: List<CurrencyRate>? = null) : Parcelable {
     constructor(parcel: Parcel) : this(parcel.readString(), parcel.createTypedArrayList(CurrencyRate))
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

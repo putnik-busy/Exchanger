@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.demo.justapp.exchanger.R;
+import com.demo.justapp.exchanger.models.local.CurrencyRate;
 
 import java.text.DecimalFormat;
 
@@ -53,7 +54,7 @@ public class RatesViewHolder extends RecyclerView.ViewHolder {
     void bindView(CurrencyRate rate) {
         if (!mRateAmountEditText.isFocused()) {
             mRateNameTextView.setText(rate.getCurrency());
-            String formatValue = new DecimalFormat("##.##").format(rate.getRateExchange());
+            String formatValue = new DecimalFormat("##.##").format(rate.getRate());
             mRateAmountEditText.setText(formatValue);
         }
     }

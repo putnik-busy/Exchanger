@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.demo.justapp.exchanger.R;
+import com.demo.justapp.exchanger.models.local.CurrencyRate;
 import com.demo.justapp.exchanger.presentation.rates.adapter.util.CurrencyRateAdapterDiffUtil;
 
 import java.util.ArrayList;
@@ -72,7 +73,7 @@ public class RatesAdapter extends RecyclerView.Adapter<RatesViewHolder> {
                 if (key.equals(KEY_CURRENCY)) {
                     currencyRate.setCurrency(o.getString(KEY_AMOUNT));
                 } else if (key.equals(KEY_AMOUNT)) {
-                    currencyRate.setRateExchange(o.getDouble(KEY_AMOUNT));
+                    currencyRate.setRate(o.getDouble(KEY_AMOUNT));
                 }
             }
             holder.bindView(currencyRate);

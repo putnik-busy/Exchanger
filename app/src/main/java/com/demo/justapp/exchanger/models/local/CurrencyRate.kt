@@ -9,8 +9,10 @@ import javax.inject.Inject
  * @author Sergey Rodionov
  */
 @Data
-data class CurrencyRate @Inject constructor(var currency: String,
-                                            var rate: Double) : Parcelable {
+data class CurrencyRate constructor(var currency: String,
+                                    var rate: Double?) : Parcelable {
+
+    @Inject constructor() : this("", null)
 
     constructor(parcel: Parcel) : this(
             parcel.readString(),
@@ -18,7 +20,7 @@ data class CurrencyRate @Inject constructor(var currency: String,
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(currency)
-        parcel.writeDouble(rate)
+        parcel.writeDouble(rate!!)
     }
 
     override fun describeContents(): Int {
