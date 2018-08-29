@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.demo.justapp.exchanger.R;
-import com.demo.justapp.exchanger.di.scope.Data;
 import com.demo.justapp.exchanger.domain.RatesInteractor;
 import com.demo.justapp.exchanger.models.local.CurrencyRate;
 import com.demo.justapp.exchanger.presentation.base.BasePresenter;
@@ -25,7 +24,6 @@ import static java.math.BigDecimal.valueOf;
 /**
  * @author Sergey Rodionov
  */
-@Data
 @InjectViewState
 public class RatesPresenter extends BasePresenter<RatesView> {
 

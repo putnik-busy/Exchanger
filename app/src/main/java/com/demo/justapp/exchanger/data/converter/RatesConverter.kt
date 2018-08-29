@@ -8,7 +8,7 @@ import com.demo.justapp.exchanger.models.remote.RatesResponse
 import javax.inject.Inject
 
 /**
- * Реализация {@link AbstractOneWayConverter} для запроса {@link RestApi#getRates(String)}()}
+ * Реализация [AbstractOneWayConverter] для запроса {@link RestApi#getRates(String)}()}
  *
  * @author Sergey Rodionov
  */

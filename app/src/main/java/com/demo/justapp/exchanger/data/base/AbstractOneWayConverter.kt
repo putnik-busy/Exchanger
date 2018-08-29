@@ -6,7 +6,7 @@ import io.reactivex.functions.Function
 import java.util.*
 
 /**
- *  Базовая реализация {@link OneWayConverter}
+ *  Базовая реализация [OneWayConverter]
  */
 abstract class AbstractOneWayConverter<F, T> : OneWayConverter<F, T> {
 
