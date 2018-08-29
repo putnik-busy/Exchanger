@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import com.demo.justapp.exchanger.data.converter.RatesConverter;
 import com.demo.justapp.exchanger.data.network.RestApi;
 import com.demo.justapp.exchanger.domain.repository.RatesRepository;
-import com.demo.justapp.exchanger.models.local.CurrencyRatesModel;
 
 import io.reactivex.Single;
 

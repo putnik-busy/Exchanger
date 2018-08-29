@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
-import com.demo.justapp.exchanger.models.local.CurrencyRate;
 import com.demo.justapp.exchanger.presentation.base.BaseView;
 
 import java.util.List;

@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.demo.justapp.exchanger.R;
-import com.demo.justapp.exchanger.models.local.CurrencyRate;
 import com.demo.justapp.exchanger.presentation.rates.adapter.util.CurrencyRateAdapterDiffUtil;
 
 import java.util.ArrayList;

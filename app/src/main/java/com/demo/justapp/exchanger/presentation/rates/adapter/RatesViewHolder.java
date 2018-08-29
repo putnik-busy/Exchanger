@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.demo.justapp.exchanger.R;
-import com.demo.justapp.exchanger.models.local.CurrencyRate;
 
 import java.text.DecimalFormat;
 

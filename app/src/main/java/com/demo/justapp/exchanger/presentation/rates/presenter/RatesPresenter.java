@@ -6,7 +6,6 @@ import com.arellomobile.mvp.InjectViewState;
 import com.demo.justapp.exchanger.R;
 import com.demo.justapp.exchanger.di.scope.Data;
 import com.demo.justapp.exchanger.domain.RatesInteractor;
-import com.demo.justapp.exchanger.models.local.CurrencyRate;
 import com.demo.justapp.exchanger.presentation.base.BasePresenter;
 import com.demo.justapp.exchanger.presentation.rates.view.RatesView;
 import com.demo.justapp.exchanger.presentation.resources.ResourceManager;

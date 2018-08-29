@@ -4,8 +4,6 @@ import android.support.annotation.NonNull;
 
 import com.demo.justapp.exchanger.di.scope.Data;
 import com.demo.justapp.exchanger.domain.repository.RatesRepository;
-import com.demo.justapp.exchanger.models.local.CurrencyRate;
-import com.demo.justapp.exchanger.models.local.CurrencyRatesModel;
 
 import java.util.List;
 

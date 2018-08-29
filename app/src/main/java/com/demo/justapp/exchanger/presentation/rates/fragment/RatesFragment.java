@@ -16,7 +16,6 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.demo.justapp.exchanger.R;
 import com.demo.justapp.exchanger.di.data.DataComponent;
-import com.demo.justapp.exchanger.models.local.CurrencyRate;
 import com.demo.justapp.exchanger.presentation.base.BaseFragment;
 import com.demo.justapp.exchanger.presentation.rates.adapter.AmountChangedListener;
 import com.demo.justapp.exchanger.presentation.rates.adapter.RatesAdapter;
