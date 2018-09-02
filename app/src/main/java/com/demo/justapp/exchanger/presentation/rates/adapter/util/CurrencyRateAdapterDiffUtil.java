@@ -74,10 +74,12 @@ public class CurrencyRateAdapterDiffUtil extends DiffUtil.Callback {
         if (!newItem.getCurrency().equals(oldItem.getCurrency())) {
             diffBundle.putString(KEY_CURRENCY, newItem.getCurrency());
         }
-        if (newItem.getRateExchange() != oldItem.getRateExchange()) {
-            diffBundle.putDouble(KEY_AMOUNT, oldItem.getRateExchange());
+        if (newItem.getRate() != oldItem.getRate()) {
+            diffBundle.putDouble(KEY_AMOUNT, oldItem.getRate());
         }
-        if (diffBundle.size() == 0) return null;
+        if (diffBundle.size() == 0) {
+            return null;
+        }
         return diffBundle;
     }
 }

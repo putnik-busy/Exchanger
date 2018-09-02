@@ -73,7 +73,7 @@ public class RatesAdapter extends RecyclerView.Adapter<RatesViewHolder> {
                 if (key.equals(KEY_CURRENCY)) {
                     currencyRate.setCurrency(o.getString(KEY_AMOUNT));
                 } else if (key.equals(KEY_AMOUNT)) {
-                    currencyRate.setRateExchange(o.getDouble(KEY_AMOUNT));
+                    currencyRate.setRate(o.getDouble(KEY_AMOUNT));
                 }
             }
             holder.bindView(currencyRate);

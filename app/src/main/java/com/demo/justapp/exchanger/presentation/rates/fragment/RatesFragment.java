@@ -24,6 +24,7 @@ import com.demo.justapp.exchanger.presentation.rates.adapter.RecyclerViewItemLis
 import com.demo.justapp.exchanger.presentation.rates.presenter.RatesPresenter;
 import com.demo.justapp.exchanger.presentation.rates.view.RatesView;
 
+
 import java.util.List;
 
 import javax.inject.Inject;

@@ -54,7 +54,7 @@ public class RatesViewHolder extends RecyclerView.ViewHolder {
     void bindView(CurrencyRate rate) {
         if (!mRateAmountEditText.isFocused()) {
             mRateNameTextView.setText(rate.getCurrency());
-            String formatValue = new DecimalFormat("##.##").format(rate.getRateExchange());
+            String formatValue = new DecimalFormat("##.##").format(rate.getRate());
             mRateAmountEditText.setText(formatValue);
         }
     }
