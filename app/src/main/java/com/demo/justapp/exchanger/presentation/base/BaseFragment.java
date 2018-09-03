@@ -12,7 +12,7 @@ public class BaseFragment extends MvpAppCompatFragment {
 
     protected <C> C getComponent(Class<C> componentType) {
         Preconditions.checkNotNull(getActivity());
-        return ComponentUtils.Companion.getComponent(getActivity(), componentType);
+        return ComponentUtils.INSTANCE.getComponent(getActivity(), componentType);
     }
 
 }

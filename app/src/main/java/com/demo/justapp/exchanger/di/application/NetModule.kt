@@ -25,18 +25,18 @@ import javax.inject.Singleton
 class NetModule {
 
     companion object {
-        private const val BASE_URL: String = "https://revolut.duckdns.org/"
-        private const val TIMEOUT: Long = 20
+        private const val BASE_URL = "https://revolut.duckdns.org/"
+        private const val TIMEOUT = 20L
     }
 
     @Singleton
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
-        val builder: OkHttpClient.Builder = OkHttpClient.Builder()
+        return OkHttpClient.Builder()
                 .addInterceptor(LoggingInterceptor())
                 .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(TIMEOUT, TimeUnit.SECONDS)
-        return builder.build()
+                .build()
     }
 
     @Singleton
@@ -69,15 +69,13 @@ class NetModule {
     }
 
     private class DateSerializer : JsonSerializer<Date> {
-        override fun serialize(src: Date?, typeOfSrc: Type?, context: JsonSerializationContext?): JsonElement? {
-            return if (src == null) null else JsonPrimitive(src.time / 1000)
-        }
+        override fun serialize(src: Date?, typeOfSrc: Type?, context: JsonSerializationContext?) =
+                JsonPrimitive(src?.time?.div(1000))
     }
 
     private class DateDeserializer : JsonDeserializer<Date> {
-        override fun deserialize(json: JsonElement?, typeOfT: Type?, context: JsonDeserializationContext?): Date? {
-            return if (json == null || json.asLong == 0L) null else Date(json.asLong * 1000)
-        }
+        override fun deserialize(json: JsonElement?, typeOfT: Type?, context: JsonDeserializationContext?) =
+                Date(json?.asLong?.times(1000) ?: 0L)
     }
 
 }

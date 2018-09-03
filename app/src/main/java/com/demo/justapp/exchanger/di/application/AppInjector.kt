@@ -22,9 +22,7 @@ class AppInjector private constructor() {
         }
 
         @NonNull
-        fun getAppComponent(): AppComponent {
-            return mAppComponent
-        }
+        fun getAppComponent() = mAppComponent
     }
 
 }

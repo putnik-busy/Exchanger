@@ -6,11 +6,9 @@ import com.demo.justapp.exchanger.di.application.HasComponent
 /**
  * @author Sergey Rodionov
  */
-class ComponentUtils private constructor() {
+object ComponentUtils {
 
-    companion object {
-        fun <C> getComponent(context: Context, componentType: Class<C>): C {
-            return componentType.cast((context as HasComponent<*>).getComponent())
-        }
+    fun <C> getComponent(context: Context, componentType: Class<C>): C {
+        return componentType.cast((context as HasComponent<*>).getComponent())
     }
 }

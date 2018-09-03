@@ -97,6 +97,11 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:$appcompatVersion"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
+
+androidExtensions {
+    experimental = true
+}
+
 repositories {
     mavenCentral()
 }
