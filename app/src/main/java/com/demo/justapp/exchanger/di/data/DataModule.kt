@@ -6,7 +6,7 @@ import dagger.Binds
 import dagger.Module
 
 /**
- * Модуль {@link Module} для работы c курсами валют в приложении.
+ * Модуль [dagger.Module] для работы c курсами валют в приложении.
  *
  * @author Sergey Rodionov
  */

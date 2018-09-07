@@ -12,6 +12,6 @@ public class ExchangerApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        AppInjector.createAppComponent(this).inject(this);
+         AppInjector.Companion.createAppComponent(this).inject(this);
     }
 }

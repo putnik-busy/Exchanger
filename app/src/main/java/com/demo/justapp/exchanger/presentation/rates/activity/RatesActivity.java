@@ -22,13 +22,15 @@ import com.demo.justapp.exchanger.utils.ActivityUtils;
 public class RatesActivity extends AppCompatActivity implements HasComponent<DataComponent> {
 
     private DataComponent mDataComponent;
+    private DataInjector mDataInjector;
 
     /**
      * {@inheritDoc}
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mDataComponent = DataInjector.createDataComponent();
+        mDataInjector = new DataInjector();
+        mDataComponent = mDataInjector.createDataComponent();
         mDataComponent.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_container);
@@ -44,7 +46,7 @@ public class RatesActivity extends AppCompatActivity implements HasComponent<Dat
     protected void onDestroy() {
         super.onDestroy();
         if (isFinishing()) {
-            DataInjector.clearDataModule();
+            mDataInjector.clearDataComponent();
         }
     }
 
