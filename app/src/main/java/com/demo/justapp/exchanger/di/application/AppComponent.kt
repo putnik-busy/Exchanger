@@ -3,6 +3,7 @@ package com.demo.justapp.exchanger.di.application
 import android.app.Application
 import com.demo.justapp.exchanger.ExchangerApp
 import com.demo.justapp.exchanger.di.data.DataComponent
+import com.demo.justapp.exchanger.di.data.DataInjector
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -34,5 +35,7 @@ interface AppComponent {
     fun inject(exchangerApp: ExchangerApp)
 
     fun createDataComponent(): DataComponent.Builder
+
+    fun getDataInjector(): DataInjector
 
 }

@@ -49,7 +49,7 @@ class NetModule {
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory
-                        .createWithScheduler(rxSchedulers.ioScheduler))
+                        .createWithScheduler(rxSchedulers.getIOScheduler()))
                 .build()
     }
 

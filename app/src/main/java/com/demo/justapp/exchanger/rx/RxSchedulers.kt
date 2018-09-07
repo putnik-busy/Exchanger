@@ -1,29 +1,26 @@
-package com.demo.justapp.exchanger.rx;
+package com.demo.justapp.exchanger.rx
 
-import android.support.annotation.NonNull;
-
-import io.reactivex.Scheduler;
+import io.reactivex.Scheduler
 
 /**
  * Планировщик для создания потоков
  *
  * @author Sergey Rodionov
  */
-public interface RxSchedulers {
+interface RxSchedulers {
 
     /**
      * Создает планироващик для главного потока
      *
      * @return {@link Scheduler}
      */
-    @NonNull
-    Scheduler getMainThreadScheduler();
+    fun getMainThreadScheduler(): Scheduler
 
     /**
      * Создает планироващик для worker потока
      *
      * @return {@link Scheduler}
      */
-    @NonNull
-    Scheduler getIOScheduler();
+    fun getIOScheduler(): Scheduler
+
 }
