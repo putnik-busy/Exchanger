@@ -13,11 +13,11 @@ import javax.inject.Inject
  */
 class RatesInteractor @Inject constructor(@NonNull ratesRepository: RatesRepository) {
 
-    val mRatesRepository: RatesRepository = ratesRepository
+    private val mRatesRepository: RatesRepository = ratesRepository
 
     fun loadRates(@NonNull currency: String): Single<List<CurrencyRate>> {
         return mRatesRepository.loadRates(currency)
-                .flattenAsObservable<CurrencyRate>({ it.rates!! })
+                .flattenAsObservable<CurrencyRate> { it.rates!! }
                 .toList()
     }
 }

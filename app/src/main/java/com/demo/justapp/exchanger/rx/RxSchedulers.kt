@@ -23,4 +23,11 @@ interface RxSchedulers {
      */
     fun getIOScheduler(): Scheduler
 
+    /**
+     * Создает планироващик для Computation потока
+     *
+     * @return {@link Scheduler}
+     */
+    fun getComputationScheduler(): Scheduler
+
 }

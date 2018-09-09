@@ -2,8 +2,8 @@ package com.demo.justapp.exchanger.di.application
 
 import com.demo.justapp.exchanger.rx.RxSchedulers
 import com.demo.justapp.exchanger.rx.RxSchedulersImpl
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import javax.inject.Singleton
 
 /**
@@ -12,11 +12,9 @@ import javax.inject.Singleton
  * @author Sergey Rodionov
  */
 @Module
-class RxModule {
+interface RxModule {
 
     @Singleton
-    @Provides
-    fun provideRxSchedulers(): RxSchedulers {
-        return RxSchedulersImpl()
-    }
+    @Binds
+    fun provideRxSchedulers(rxSchedulersImpl: RxSchedulersImpl): RxSchedulers
 }

@@ -15,4 +15,9 @@ class RxSchedulersStub : RxSchedulers {
     override fun getMainThreadScheduler(): Scheduler {
         return Schedulers.trampoline()
     }
+
+    override fun getComputationScheduler(): Scheduler {
+        return Schedulers.trampoline()
+    }
+
 }

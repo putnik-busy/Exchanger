@@ -58,8 +58,7 @@ class RatesPresenter @Inject constructor(
                 mRatesInteractor.loadRates(currency)
                         .repeatWhen { it -> it.delay(1, TimeUnit.SECONDS) }
                         .subscribeOn(mRxSchedulers.getIOScheduler())
-                        .observeOn(mRxSchedulers.getMainThreadScheduler())
-                        .doOnSubscribe { _ -> viewState.showProgress(true) }
+                        .observeOn(mRxSchedulers.getComputationScheduler())
                         .flatMapSingle { elements ->
                             fromIterable(elements)
                                     .map { element ->
@@ -69,6 +68,8 @@ class RatesPresenter @Inject constructor(
                                     .startWith(mCurrencyRate)
                                     .toList()
                         }
+                        .observeOn(mRxSchedulers.getMainThreadScheduler())
+                        .doOnSubscribe { _ -> viewState.showProgress(true)}
                         .subscribe(getSuccessConsumerLoadRates(), getErrorConsumerLoadRates()))
     }
 
