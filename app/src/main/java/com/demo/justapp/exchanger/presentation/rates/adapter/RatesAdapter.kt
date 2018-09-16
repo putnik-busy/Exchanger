@@ -55,9 +55,7 @@ class RatesAdapter(recyclerViewItemListener: RecyclerViewItemListener,
         }
     }
 
-    override fun getItemCount(): Int {
-        return mRates.size
-    }
+    override fun getItemCount(): Int = mRates.size
 
     fun addRates(rates: List<CurrencyRate>) {
         val diffCallback = CurrencyRateAdapterDiffUtil(mRates, rates)
