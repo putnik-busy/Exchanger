@@ -1,9 +1,9 @@
 package com.demo.justapp.exchanger.domain
 
-import android.support.annotation.NonNull
 import com.demo.justapp.exchanger.domain.repository.RatesRepository
 import com.demo.justapp.exchanger.models.local.CurrencyRate
 import io.reactivex.Single
+import java.util.Collections.emptyList
 import javax.inject.Inject
 
 /**
@@ -11,13 +11,13 @@ import javax.inject.Inject
  *
  * @author Sergey Rodionov
  */
-class RatesInteractor @Inject constructor(@NonNull ratesRepository: RatesRepository) {
+class RatesInteractor @Inject constructor(ratesRepository: RatesRepository) {
 
-    val mRatesRepository: RatesRepository = ratesRepository
+    private val mRatesRepository: RatesRepository = ratesRepository
 
-    fun loadRates(@NonNull currency: String): Single<List<CurrencyRate>> {
+    fun loadRates(currency: String): Single<List<CurrencyRate>> {
         return mRatesRepository.loadRates(currency)
-                .flattenAsObservable<CurrencyRate>({ it.rates!! })
+                .flattenAsObservable<CurrencyRate> { it.rates ?: emptyList() }
                 .toList()
     }
 }
