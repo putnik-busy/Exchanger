@@ -34,9 +34,7 @@ class RatesFragment : BaseFragment(),
     companion object {
         const val TAG = "RatesFragment"
 
-        fun newInstance(): RatesFragment {
-            return RatesFragment()
-        }
+        fun newInstance() = RatesFragment()
     }
 
     private lateinit var mRecyclerView: RecyclerView
