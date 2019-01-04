@@ -28,26 +28,23 @@ import javax.inject.Provider
  *
  * @author Sergey Rodionov
  */
-class RatesFragment : BaseFragment(),
-        RatesView, RecyclerViewItemListener, AmountChangedListener {
+class RatesFragment : BaseFragment(), RatesView {
 
     companion object {
         const val TAG = "RatesFragment"
-
-        fun newInstance(): RatesFragment {
-            return RatesFragment()
-        }
+        @JvmStatic
+        fun newInstance(): RatesFragment = RatesFragment()
     }
-
-    private lateinit var mRecyclerView: RecyclerView
-    private lateinit var mEmptyTextView: TextView
-    private lateinit var mProgressBar: ContentLoadingProgressBar
-    private lateinit var mRatesAdapter: RatesAdapter
 
     @Inject
     lateinit var mProviderRatesPresenter: Provider<RatesPresenter>
     @InjectPresenter
     lateinit var mRatesPresenter: RatesPresenter
+
+    private lateinit var mRecyclerView: RecyclerView
+    private lateinit var mEmptyTextView: TextView
+    private lateinit var mProgressBar: ContentLoadingProgressBar
+    private lateinit var mRatesAdapter: RatesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         getComponent(DataComponent::class.java).inject(this)
@@ -63,22 +60,6 @@ class RatesFragment : BaseFragment(),
         super.onViewCreated(view, savedInstanceState)
         initView(view)
         prepareAdapter()
-        mRatesPresenter.attachView(this)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mRatesPresenter.detachView(this)
-    }
-
-    override fun onItemClick(adapterPosition: Int, viewType: Int) {
-        val rate: CurrencyRate = mRatesAdapter.rates[adapterPosition]
-        mRatesPresenter.onChangeDefaultCurrency(rate.currency)
-        mRatesAdapter.changeDefaultRate(adapterPosition)
-    }
-
-    override fun amountChanged(amount: Double) {
-        mRatesPresenter.onChangeAmountCurrency(mRatesAdapter.rates, amount)
     }
 
     override fun showRates(list: List<CurrencyRate>) {
@@ -112,10 +93,24 @@ class RatesFragment : BaseFragment(),
     }
 
     private fun prepareAdapter() {
-        mRatesAdapter = RatesAdapter(this, this)
+        mRatesAdapter = RatesAdapter(InnerRecyclerViewItemListener(), InnerAmountChangedListener())
         mRecyclerView.adapter = mRatesAdapter
         mRecyclerView.setHasFixedSize(true)
         mRecyclerView.layoutManager = LinearLayoutManager(context)
+    }
+
+    private inner class InnerRecyclerViewItemListener : RecyclerViewItemListener {
+        override fun onItemClick(adapterPosition: Int, viewType: Int) {
+            val rate: CurrencyRate = mRatesAdapter.rates[adapterPosition]
+            mRatesPresenter.onChangeDefaultCurrency(rate.currency)
+            mRatesAdapter.changeDefaultRate(adapterPosition)
+        }
+    }
+
+    private inner class InnerAmountChangedListener : AmountChangedListener {
+        override fun amountChanged(amount: Double) {
+            mRatesPresenter.onChangeAmountCurrency(mRatesAdapter.rates, amount)
+        }
     }
 
 }

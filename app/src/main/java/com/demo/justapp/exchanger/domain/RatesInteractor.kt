@@ -17,7 +17,7 @@ class RatesInteractor @Inject constructor(ratesRepository: RatesRepository) {
 
     fun loadRates(currency: String): Single<List<CurrencyRate>> {
         return mRatesRepository.loadRates(currency)
-                .flattenAsObservable<CurrencyRate> { it.rates ?: emptyList() }
+                .flattenAsObservable<CurrencyRate> { it.rates }
                 .toList()
     }
 }

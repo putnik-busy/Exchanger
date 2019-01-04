@@ -20,8 +20,8 @@ class RatesViewHolder(itemView: View,
                       amountChangedListener: AmountChangedListener)
     : RecyclerView.ViewHolder(itemView) {
 
-    private val mRecyclerViewItemListener: RecyclerViewItemListener = recyclerViewItemListener
-    private val mAmountChangedListener: AmountChangedListener = amountChangedListener
+    private val mRecyclerViewItemListener = recyclerViewItemListener
+    private val mAmountChangedListener = amountChangedListener
     private val mRateNameTextView: TextView = itemView.findViewById(R.id.rate_name_text_view)
     private val mRateAmountEditText: EditText = itemView.findViewById(R.id.rate_amount_edit_text)
 

@@ -8,11 +8,11 @@ import javax.inject.Inject
  *
  * @author Sergey Rodionov
  */
-class DataInjector @Inject constructor(){
+class DataInjector @Inject constructor() {
 
     private var mDataComponent: DataComponent? = null
 
-    fun createDataComponent(): DataComponent {
+    fun getDataComponent(): DataComponent {
         if (mDataComponent == null) {
             mDataComponent = AppInjector.getAppComponent()
                     .createDataComponent()

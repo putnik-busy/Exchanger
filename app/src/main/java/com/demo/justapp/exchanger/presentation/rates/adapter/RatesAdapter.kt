@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import com.demo.justapp.exchanger.R
 import com.demo.justapp.exchanger.models.local.CurrencyRate
 import com.demo.justapp.exchanger.presentation.rates.adapter.util.CurrencyRateAdapterDiffUtil
-import com.demo.justapp.exchanger.presentation.rates.adapter.util.CurrencyRateAdapterDiffUtil.Companion.KEY_AMOUNT
-import com.demo.justapp.exchanger.presentation.rates.adapter.util.CurrencyRateAdapterDiffUtil.Companion.KEY_CURRENCY
+import com.demo.justapp.exchanger.presentation.rates.adapter.util.KEY_AMOUNT
+import com.demo.justapp.exchanger.presentation.rates.adapter.util.KEY_CURRENCY
 import java.util.*
 
 /**

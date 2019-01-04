@@ -1,4 +1,4 @@
-package com.demo.justapp.exchanger.utils
+package com.demo.justapp.exchanger.exts
 
 import android.content.Context
 import com.demo.justapp.exchanger.di.application.HasComponent

@@ -1,7 +1,7 @@
 package com.demo.justapp.exchanger.presentation.base
 
 import com.arellomobile.mvp.MvpAppCompatFragment
-import com.demo.justapp.exchanger.utils.ComponentUtils
+import com.demo.justapp.exchanger.exts.ComponentUtils
 
 /**
  * Базовый фрагмент для приложения.

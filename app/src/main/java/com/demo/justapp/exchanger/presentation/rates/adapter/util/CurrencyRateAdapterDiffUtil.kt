@@ -7,14 +7,11 @@ import com.demo.justapp.exchanger.models.local.CurrencyRate
 /**
  * @author Sergey Rodionov
  */
-class CurrencyRateAdapterDiffUtil(oldList: List<CurrencyRate>,
-                                  newList: List<CurrencyRate>)
-    : DiffUtil.Callback() {
+internal const val KEY_CURRENCY = "currency"
+internal const val KEY_AMOUNT = "amount"
 
-    companion object {
-        internal const val KEY_CURRENCY = "currency"
-        internal const val KEY_AMOUNT = "amount"
-    }
+class CurrencyRateAdapterDiffUtil(oldList: List<CurrencyRate>,
+                                  newList: List<CurrencyRate>) : DiffUtil.Callback() {
 
     private val mOldList: List<CurrencyRate> = oldList
     private val mNewList: List<CurrencyRate> = newList

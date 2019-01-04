@@ -1,7 +1,5 @@
 package com.demo.justapp.exchanger.data.base
 
-import android.support.annotation.NonNull
-
 /**
  * Однонаправленный конвертор из сущности [F] в сущность [T].
  *
@@ -10,6 +8,5 @@ import android.support.annotation.NonNull
  */
 interface OneWayConverter<F, T> {
 
-    @NonNull
     fun convert(from: F): T
 }

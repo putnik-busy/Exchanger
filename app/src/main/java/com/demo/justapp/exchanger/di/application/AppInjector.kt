@@ -1,7 +1,6 @@
 package com.demo.justapp.exchanger.di.application
 
-import android.app.Application
-import android.support.annotation.NonNull
+import com.demo.justapp.exchanger.ExchangerApp
 
 /**
  * Инжектор для компонента [AppComponent]
@@ -13,15 +12,17 @@ class AppInjector private constructor() {
     companion object {
         private lateinit var mAppComponent: AppComponent
 
-        @NonNull
-        fun createAppComponent(application: Application): AppComponent {
+        @JvmStatic
+        fun createAppComponent(application: ExchangerApp): AppComponent {
             mAppComponent = DaggerAppComponent.builder()
-                    .application(application)
+                    .context(application.applicationContext)
                     .build()
+            mAppComponent.inject(application)
+
             return mAppComponent
         }
 
-        @NonNull
+        @JvmStatic
         fun getAppComponent() = mAppComponent
     }
 

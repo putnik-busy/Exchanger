@@ -1,6 +1,6 @@
 package com.demo.justapp.exchanger.di.application
 
-import android.app.Application
+import android.content.Context
 import com.demo.justapp.exchanger.ExchangerApp
 import com.demo.justapp.exchanger.di.data.DataComponent
 import com.demo.justapp.exchanger.di.data.DataInjector
@@ -27,7 +27,7 @@ interface AppComponent {
     interface Builder {
 
         @BindsInstance
-        fun application(application: Application): Builder
+        fun context(context: Context): Builder
 
         fun build(): AppComponent
     }

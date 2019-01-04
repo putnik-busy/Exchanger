@@ -1,6 +1,5 @@
 package com.demo.justapp.exchanger.di.application
 
-import android.app.Application
 import android.content.Context
 import com.demo.justapp.exchanger.presentation.resources.ResourceManager
 import dagger.Module
@@ -16,10 +15,6 @@ import javax.inject.Singleton
  */
 @Module
 class AppModule {
-
-    @Singleton
-    @Provides
-    fun provideAppContext(application: Application): Context = application.applicationContext
 
     @Singleton
     @Provides

@@ -1,6 +1,5 @@
 package com.demo.justapp.exchanger.di.application
 
-import android.support.annotation.NonNull
 import com.demo.justapp.exchanger.data.network.LoggingInterceptor
 import com.demo.justapp.exchanger.data.network.RestApi
 import com.demo.justapp.exchanger.rx.RxSchedulers
@@ -13,6 +12,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.reflect.Type
 import java.util.*
+
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -21,13 +21,11 @@ import javax.inject.Singleton
  *
  * @author Sergey Rodionov
  */
+private const val BASE_URL = "https://revolut.duckdns.org/"
+private const val TIMEOUT = 20L
+
 @Module
 class NetModule {
-
-    companion object {
-        private const val BASE_URL = "https://revolut.duckdns.org/"
-        private const val TIMEOUT = 20L
-    }
 
     @Singleton
     @Provides
@@ -41,9 +39,9 @@ class NetModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(@NonNull client: OkHttpClient,
-                        @NonNull gson: Gson,
-                        @NonNull rxSchedulers: RxSchedulers): Retrofit {
+    fun provideRetrofit(client: OkHttpClient,
+                        gson: Gson,
+                        rxSchedulers: RxSchedulers): Retrofit {
         return Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(client)
@@ -64,7 +62,7 @@ class NetModule {
 
     @Singleton
     @Provides
-    fun provideRestApi(@NonNull retrofit: Retrofit): RestApi {
+    fun provideRestApi(retrofit: Retrofit): RestApi {
         return retrofit.create(RestApi::class.java)
     }
 

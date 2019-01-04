@@ -10,7 +10,7 @@ class ExchangerApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        AppInjector.createAppComponent(this).inject(this)
+        AppInjector.createAppComponent(this)
     }
 
 }
