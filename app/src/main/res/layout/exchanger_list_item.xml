@@ -1,33 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:foreground="?android:attr/selectableItemBackground"
+    android:background="?android:attr/selectableItemBackground"
     android:padding="10dp">
 
     <TextView
-        android:id="@+id/rate_name_text_view"
+        android:id="@+id/currencyNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:textColor="@android:color/black"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/rate_amount_edit_text"
+        app:layout_constraintBaseline_toBaselineOf="@+id/exchangeRateEditText"
         app:layout_constraintLeft_toLeftOf="parent"
-        tools:text="GBG"/>
+        tools:text="GBG" />
 
     <EditText
-        android:id="@+id/rate_amount_edit_text"
+        android:id="@+id/exchangeRateEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:imeOptions="actionDone"
         android:inputType="numberDecimal"
         android:textSize="20sp"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:text="2876,13"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="2876,13" />
 
 </android.support.constraint.ConstraintLayout>

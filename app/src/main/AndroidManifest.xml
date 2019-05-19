@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".presentation.rates.activity.RatesActivity">
+        <activity android:name="com.demo.justapp.exchanger.presentation.ui.activity.CurrencyRatesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

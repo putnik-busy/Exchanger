@@ -1,26 +1,27 @@
 package com.demo.justapp.exchanger.presentation.base
 
 import com.arellomobile.mvp.MvpPresenter
+import com.arellomobile.mvp.MvpView
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 
 /**
  * Базовый презентер для приложения.
- * <p>
- * Тут будет какая-то общая логика для всех презентеров в приложении.
  *
- * @param <V> интерфейс для представления
+ * @param [V] интерфейс для вью
  *
- * @author Sergey Rodionov
  */
-open class BasePresenter<V : BaseView> : MvpPresenter<V>() {
+open class BasePresenter<V : MvpView> : MvpPresenter<V>() {
 
-    private val mCompositeDisposable: CompositeDisposable = CompositeDisposable()
+    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
-    protected fun getRxCompositeDisposable(): CompositeDisposable = mCompositeDisposable
+    protected fun Disposable.untilDestroy() {
+        compositeDisposable.add(this)
+    }
 
     override fun onDestroy() {
         super.onDestroy()
-        mCompositeDisposable.dispose()
+        compositeDisposable.clear()
     }
 
 }
