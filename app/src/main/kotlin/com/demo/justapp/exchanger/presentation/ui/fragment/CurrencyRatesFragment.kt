@@ -13,14 +13,14 @@ import com.demo.justapp.exchanger.di.currencies.CurrenciesComponent
 import com.demo.justapp.exchanger.domain.model.CurrencyRate
 import com.demo.justapp.exchanger.extensions.hideKeyboard
 import com.demo.justapp.exchanger.presentation.presenters.CurrencyRatesPresenter
-import com.demo.justapp.exchanger.presentation.ui.adapter.RatesAdapter
+import com.demo.justapp.exchanger.presentation.ui.adapter.CurrencyRatesAdapter
 import com.demo.justapp.exchanger.presentation.ui.base.BaseFragment
 import com.demo.justapp.exchanger.presentation.ui.view.RatesView
 import kotlinx.android.synthetic.main.fragment_exchanger.*
 import javax.inject.Inject
 
 internal typealias CurrencyItemListener = (Int) -> Unit
-internal typealias ChangeAmountListener = (Double) -> Unit
+internal typealias ChangeAmountListener = (String) -> Unit
 
 class RatesFragment : BaseFragment(), RatesView {
 
@@ -35,7 +35,7 @@ class RatesFragment : BaseFragment(), RatesView {
     @InjectPresenter
     lateinit var presenter: CurrencyRatesPresenter
 
-    private lateinit var ratesAdapter: RatesAdapter
+    private lateinit var currencyAdapter: CurrencyRatesAdapter
     private lateinit var recyclerListener: RecyclerView.OnScrollListener
 
     @ProvidePresenter
@@ -60,12 +60,8 @@ class RatesFragment : BaseFragment(), RatesView {
         recyclerVew.removeOnScrollListener(recyclerListener)
     }
 
-    override fun showRates(list: List<CurrencyRate>) {
-        ratesAdapter.items = list
-    }
-
-    override fun updateRates(list: List<CurrencyRate>) {
-        ratesAdapter.updateRates(list)
+    override fun showRates(items: List<CurrencyRate>) {
+        currencyAdapter.items = items
     }
 
     override fun showProgress(loading: Boolean) {
@@ -78,32 +74,32 @@ class RatesFragment : BaseFragment(), RatesView {
     }
 
     private fun prepareAdapter(view: View) {
-        recyclerListener = object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
-                    context?.hideKeyboard(view)
-                }
-            }
-        }
-
-        ratesAdapter = RatesAdapter({ changeBaseCurrency(it) }, { changeAmountBaseCurrency(it) })
+        initScrollListener(view)
+        currencyAdapter = CurrencyRatesAdapter({ changeBaseCurrency(it) }, { changeAmountBaseCurrency(it) })
         with(recyclerVew) {
-            adapter = ratesAdapter
-            setHasFixedSize(true)
+            adapter = currencyAdapter
             layoutManager = LinearLayoutManager(context)
             addOnScrollListener(recyclerListener)
         }
     }
 
     private fun changeBaseCurrency(adapterPosition: Int) {
-        val rate: CurrencyRate = ratesAdapter.items[adapterPosition]
-        presenter.onChangeDefaultCurrency(rate.currency)
-        ratesAdapter.changeDefaultRate(adapterPosition)
+        presenter.onChangeDefaultCurrency(currencyAdapter.items[adapterPosition])
     }
 
-    private fun changeAmountBaseCurrency(amount: Double) {
-        presenter.onChangeAmountCurrency(ratesAdapter.items, amount)
+    private fun changeAmountBaseCurrency(course: String) {
+        presenter.onChangeAmountCurrency(course)
+    }
+
+    private fun initScrollListener(view: View) {
+        recyclerListener = object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
+                    view.hideKeyboard()
+                }
+            }
+        }
     }
 
 }

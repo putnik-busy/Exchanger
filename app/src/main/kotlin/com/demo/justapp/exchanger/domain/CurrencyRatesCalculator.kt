@@ -8,6 +8,7 @@ import io.reactivex.functions.Function
 import java.math.BigDecimal
 import java.text.NumberFormat
 import javax.inject.Inject
+import kotlin.properties.Delegates
 
 @Currencies
 class CurrencyRatesCalculator @Inject constructor() {
@@ -20,16 +21,20 @@ class CurrencyRatesCalculator @Inject constructor() {
         return@lazy numberFormat
     }
 
-    fun calculate(current: List<CurrencyRate>, base: CurrencyRate): Single<List<CurrencyRate>> {
-        return Observable.fromIterable(current)
-                .flatMapSingle(calculateRateInternal(base))
+    var course: BigDecimal by Delegates.observable(BigDecimal.ZERO) { property, oldValue, newValue ->
+        calculate(emptyList(), newValue)
+    }
+
+    fun calculate(currencies: List<CurrencyRate>, course: BigDecimal): Single<List<CurrencyRate>> {
+        return Observable.fromIterable(currencies)
+                .flatMapSingle(calculateRateInternal(course))
                 .flatMapSingle(formatRate())
                 .toList()
     }
 
-    private fun calculateRateInternal(base: CurrencyRate): Function<CurrencyRate, Single<CurrencyRate>> {
+    private fun calculateRateInternal(course: BigDecimal): Function<CurrencyRate, Single<CurrencyRate>> {
         return Function { current ->
-            current.course = current.course.multiply(base.course)
+            current.course = current.course.multiply(course)
             Single.just(current)
         }
     }

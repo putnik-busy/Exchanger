@@ -8,10 +8,9 @@ import com.demo.justapp.exchanger.domain.model.CurrencyRate
 import com.demo.justapp.exchanger.presentation.ui.adapter.extension.DiffUtilAdapter
 import com.demo.justapp.exchanger.presentation.ui.fragment.ChangeAmountListener
 import com.demo.justapp.exchanger.presentation.ui.fragment.CurrencyItemListener
-import java.util.*
 import kotlin.properties.Delegates
 
-class RatesAdapter(
+class CurrencyRatesAdapter(
         private val onClickListener: CurrencyItemListener,
         private val changeAmountListener: ChangeAmountListener
 ) : RecyclerView.Adapter<CurrencyRatesViewHolder>(), DiffUtilAdapter {
@@ -31,14 +30,5 @@ class RatesAdapter(
     }
 
     override fun getItemCount(): Int = items.size
-
-    fun updateRates(rates: List<CurrencyRate>) {
-        notifyItemRangeChanged(0, rates.size - 1)
-    }
-
-    fun changeDefaultRate(position: Int) {
-        Collections.swap(items, position, 0)
-        notifyItemMoved(position, 0)
-    }
 
 }

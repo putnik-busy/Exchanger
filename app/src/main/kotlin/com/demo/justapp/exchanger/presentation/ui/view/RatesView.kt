@@ -14,16 +14,9 @@ interface RatesView : MvpView {
     /**
      * Отобразить список валют
      *
-     * @param list список валют для отображения
+     * @param items список валют для отображения
      */
-    fun showRates(list: List<CurrencyRate>)
-
-    /**
-     * Обновить список валют
-     *
-     * @param list список валют для отображения
-     */
-    fun updateRates(list: List<CurrencyRate>)
+    fun showRates(items: List<CurrencyRate>)
 
     /**
      * Показать прогресс загрузки
