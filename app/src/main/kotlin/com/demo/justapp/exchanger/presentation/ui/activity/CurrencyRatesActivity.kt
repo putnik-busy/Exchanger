@@ -9,7 +9,7 @@ import com.demo.justapp.exchanger.di.application.HasComponent
 import com.demo.justapp.exchanger.di.currencies.CurrenciesComponent
 import com.demo.justapp.exchanger.di.currencies.CurrenciesInjector
 import com.demo.justapp.exchanger.extensions.addFragment
-import com.demo.justapp.exchanger.presentation.ui.fragment.RatesFragment
+import com.demo.justapp.exchanger.presentation.ui.fragment.CurrencyRatesFragment
 
 class CurrencyRatesActivity : AppCompatActivity(), HasComponent<CurrenciesComponent> {
 
@@ -37,7 +37,7 @@ class CurrencyRatesActivity : AppCompatActivity(), HasComponent<CurrenciesCompon
     private fun initFragment() {
         val fragment: Fragment? = supportFragmentManager.findFragmentById(R.id.container)
         if (fragment == null) {
-            addFragment(RatesFragment.newInstance(), R.id.container, RatesFragment.TAG)
+            addFragment(CurrencyRatesFragment.newInstance(), R.id.container, CurrencyRatesFragment.TAG)
         }
     }
 

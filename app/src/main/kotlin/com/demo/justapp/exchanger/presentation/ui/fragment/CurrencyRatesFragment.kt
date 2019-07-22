@@ -22,13 +22,13 @@ import javax.inject.Inject
 internal typealias CurrencyItemListener = (Int) -> Unit
 internal typealias ChangeAmountListener = (String) -> Unit
 
-class RatesFragment : BaseFragment(), RatesView {
+class CurrencyRatesFragment : BaseFragment(), RatesView {
 
     companion object {
-        const val TAG = "RatesFragment"
+        const val TAG = "CurrencyRatesFragment"
 
         @JvmStatic
-        fun newInstance(): RatesFragment = RatesFragment()
+        fun newInstance(): CurrencyRatesFragment = CurrencyRatesFragment()
     }
 
     @Inject
