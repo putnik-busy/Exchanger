@@ -8,7 +8,6 @@ import io.reactivex.functions.Function
 import java.math.BigDecimal
 import java.text.NumberFormat
 import javax.inject.Inject
-import kotlin.properties.Delegates
 
 @Currencies
 class CurrencyRatesCalculator @Inject constructor() {
@@ -19,10 +18,6 @@ class CurrencyRatesCalculator @Inject constructor() {
         numberFormat.maximumFractionDigits = 2
         numberFormat.minimumFractionDigits = 0
         return@lazy numberFormat
-    }
-
-    var course: BigDecimal by Delegates.observable(BigDecimal.ZERO) { property, oldValue, newValue ->
-        calculate(emptyList(), newValue)
     }
 
     fun calculate(currencies: List<CurrencyRate>, course: BigDecimal): Single<List<CurrencyRate>> {

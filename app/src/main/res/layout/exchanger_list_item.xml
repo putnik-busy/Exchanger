@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/currencyContainer"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
@@ -10,27 +11,27 @@
 
     <TextView
         android:id="@+id/currencyNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
         android:textColor="@android:color/black"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/exchangeRateEditText"
-        app:layout_constraintLeft_toLeftOf="parent"
-        tools:text="GBG" />
+        tools:text="GBG"/>
 
     <EditText
         android:id="@+id/exchangeRateEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:autofillHints="@string/empty_rate"
+        android:hint="@string/empty_rate"
         android:imeOptions="actionDone"
         android:inputType="numberDecimal"
+        android:maxLength="10"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="2876,13" />
+        tools:targetApi="o"
+        tools:text="2876123,13"/>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
