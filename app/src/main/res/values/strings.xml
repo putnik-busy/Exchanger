@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Exchanger</string>
-    <string name="error_load_text">Ошибка загрузки</string>
+    <string name="exchange_rates">Курсы валют</string>
     <string name="stub_load_photos">Данные отсутствуют</string>
+    <string name="empty_rate">0</string>
 
 </resources>
