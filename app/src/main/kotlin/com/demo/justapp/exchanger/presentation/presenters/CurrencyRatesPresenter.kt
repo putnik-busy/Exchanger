@@ -1,7 +1,5 @@
 package com.demo.justapp.exchanger.presentation.presenters
 
-import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
 import com.demo.justapp.exchanger.di.scope.Currencies
 import com.demo.justapp.exchanger.domain.CurrencyRatesCalculator
 import com.demo.justapp.exchanger.domain.CurrencyRatesInteractor
@@ -12,6 +10,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Function
 import io.reactivex.schedulers.Schedulers
+import moxy.InjectViewState
+import moxy.MvpPresenter
 import timber.log.Timber
 import java.math.BigDecimal
 import java.util.concurrent.TimeUnit
@@ -41,7 +41,7 @@ class CurrencyRatesPresenter @Inject constructor(
     }
 
     fun onChangeAmountCurrency(course: String) {
-            currencyRate.course = parseCourse(course)
+        currencyRate.course = parseCourse(course)
     }
 
     fun onChangeDefaultCurrency(currencyRate: CurrencyRate) {

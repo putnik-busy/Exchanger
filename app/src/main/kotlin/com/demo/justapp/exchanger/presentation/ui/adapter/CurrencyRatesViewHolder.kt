@@ -1,8 +1,8 @@
 package com.demo.justapp.exchanger.presentation.ui.adapter
 
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import androidx.recyclerview.widget.RecyclerView
 import com.demo.justapp.exchanger.domain.model.CurrencyRate
 import com.demo.justapp.exchanger.extensions.afterTextChanged
 import com.demo.justapp.exchanger.extensions.hideKeyboard

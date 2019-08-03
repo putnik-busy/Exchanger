@@ -1,13 +1,11 @@
 package com.demo.justapp.exchanger.presentation.ui.fragment
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.demo.justapp.exchanger.R
 import com.demo.justapp.exchanger.di.currencies.CurrenciesComponent
 import com.demo.justapp.exchanger.domain.model.CurrencyRate
@@ -17,6 +15,8 @@ import com.demo.justapp.exchanger.presentation.ui.adapter.CurrencyRatesAdapter
 import com.demo.justapp.exchanger.presentation.ui.base.BaseFragment
 import com.demo.justapp.exchanger.presentation.ui.view.RatesView
 import kotlinx.android.synthetic.main.fragment_exchanger.*
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
 
 internal typealias CurrencyItemListener = (Int) -> Unit

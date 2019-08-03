@@ -1,7 +1,7 @@
 package com.demo.justapp.exchanger.presentation.ui.adapter.extension
 
-import android.support.v7.util.DiffUtil
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 
 interface DiffUtilAdapter {
 

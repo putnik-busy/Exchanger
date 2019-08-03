@@ -1,9 +1,9 @@
 package com.demo.justapp.exchanger.presentation.ui.view
 
-import com.arellomobile.mvp.MvpView
-import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
-import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 import com.demo.justapp.exchanger.domain.model.CurrencyRate
+import moxy.MvpView
+import moxy.viewstate.strategy.AddToEndSingleStrategy
+import moxy.viewstate.strategy.StateStrategyType
 
 /**
  * Вью списка валют
