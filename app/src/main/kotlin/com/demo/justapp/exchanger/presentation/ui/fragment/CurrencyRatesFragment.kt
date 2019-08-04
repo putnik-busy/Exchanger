@@ -7,14 +7,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.demo.justapp.exchanger.R
+import com.demo.justapp.exchanger.di.application.ComponentHelper.getComponent
 import com.demo.justapp.exchanger.di.currencies.CurrenciesComponent
 import com.demo.justapp.exchanger.domain.model.CurrencyRate
-import com.demo.justapp.exchanger.extensions.hideKeyboard
 import com.demo.justapp.exchanger.presentation.presenters.CurrencyRatesPresenter
 import com.demo.justapp.exchanger.presentation.ui.adapter.CurrencyRatesAdapter
-import com.demo.justapp.exchanger.presentation.ui.base.BaseFragment
+import com.demo.justapp.exchanger.presentation.ui.extensions.hideKeyboard
 import com.demo.justapp.exchanger.presentation.ui.view.RatesView
 import kotlinx.android.synthetic.main.fragment_exchanger.*
+import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
@@ -22,7 +23,7 @@ import javax.inject.Inject
 internal typealias CurrencyItemListener = (Int) -> Unit
 internal typealias ChangeAmountListener = (String) -> Unit
 
-class CurrencyRatesFragment : BaseFragment(), RatesView {
+class CurrencyRatesFragment : MvpAppCompatFragment(), RatesView {
 
     companion object {
         const val TAG = "CurrencyRatesFragment"
@@ -42,7 +43,7 @@ class CurrencyRatesFragment : BaseFragment(), RatesView {
     fun providePresenter(): CurrencyRatesPresenter = presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        getComponent(CurrenciesComponent::class.java).inject(this)
+        getComponent(requireActivity(), CurrenciesComponent::class.java).inject(this)
         super.onCreate(savedInstanceState)
     }
 

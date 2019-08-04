@@ -8,7 +8,7 @@ import com.demo.justapp.exchanger.di.application.ApplicationInjector
 import com.demo.justapp.exchanger.di.application.HasComponent
 import com.demo.justapp.exchanger.di.currencies.CurrenciesComponent
 import com.demo.justapp.exchanger.di.currencies.CurrenciesInjector
-import com.demo.justapp.exchanger.extensions.addFragment
+import com.demo.justapp.exchanger.presentation.ui.extensions.addFragment
 import com.demo.justapp.exchanger.presentation.ui.fragment.CurrencyRatesFragment
 
 class CurrencyRatesActivity : AppCompatActivity(), HasComponent<CurrenciesComponent> {

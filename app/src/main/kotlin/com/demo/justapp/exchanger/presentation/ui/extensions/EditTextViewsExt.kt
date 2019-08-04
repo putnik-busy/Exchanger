@@ -1,14 +1,9 @@
-package com.demo.justapp.exchanger.extensions
+package com.demo.justapp.exchanger.presentation.ui.extensions
 
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 
-/**
- * Класс экстеншен функций для [EditText]
- *
- * @author Sergey Rodionov
- */
 fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
     this.addTextChangedListener(object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {

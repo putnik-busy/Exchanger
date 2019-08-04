@@ -1,4 +1,4 @@
-package com.demo.justapp.exchanger.extensions
+package com.demo.justapp.exchanger.presentation.ui.extensions
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment

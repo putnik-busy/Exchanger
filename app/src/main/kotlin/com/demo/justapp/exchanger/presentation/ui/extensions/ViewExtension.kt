@@ -1,4 +1,4 @@
-package com.demo.justapp.exchanger.extensions
+package com.demo.justapp.exchanger.presentation.ui.extensions
 
 import android.app.Activity
 import android.content.Context

@@ -4,9 +4,9 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.recyclerview.widget.RecyclerView
 import com.demo.justapp.exchanger.domain.model.CurrencyRate
-import com.demo.justapp.exchanger.extensions.afterTextChanged
-import com.demo.justapp.exchanger.extensions.hideKeyboard
-import com.demo.justapp.exchanger.extensions.showKeyboard
+import com.demo.justapp.exchanger.presentation.ui.extensions.afterTextChanged
+import com.demo.justapp.exchanger.presentation.ui.extensions.hideKeyboard
+import com.demo.justapp.exchanger.presentation.ui.extensions.showKeyboard
 import com.demo.justapp.exchanger.presentation.ui.fragment.ChangeAmountListener
 import com.demo.justapp.exchanger.presentation.ui.fragment.CurrencyItemListener
 import kotlinx.android.extensions.LayoutContainer
