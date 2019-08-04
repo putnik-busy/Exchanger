@@ -8,6 +8,10 @@ object AndroidSupportLibraryDependencies {
 object Plugins {
     const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${LibsVersions.KOTLIN_LIBRARY_VERSION}"
     const val gradle = "com.android.tools.build:gradle:${AndroidSdkVersions.GRADLE_PLUGIN_VERSION}"
+    const val androidApplication = "com.android.application"
+    const val kotlinAndroid = "kotlin-android"
+    const val kotlinAndroidExtensions = "kotlin-android-extensions"
+    const val kotlinKapt = "kotlin-kapt"
 }
 
 object LibsDependencies {
