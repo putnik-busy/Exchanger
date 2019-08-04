@@ -8,7 +8,7 @@ import moxy.MvpAppCompatFragment
  */
 open class BaseFragment : MvpAppCompatFragment() {
 
-    protected fun <C> getComponent(componentType: Class<C>): C {
+    protected fun <T> getComponent(componentType: Class<T>): T {
         return ComponentHelper.getComponent(requireActivity(), componentType)
     }
 

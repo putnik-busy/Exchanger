@@ -10,14 +10,18 @@ private const val TAG = "LoggingInterceptor"
 
 class LoggingInterceptor : Interceptor {
 
-    private val httpLoggingInterceptor: HttpLoggingInterceptor
+    private val httpLoggingInterceptor = HttpLoggingInterceptor(TIMBER).apply {
+        level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
+        else HttpLoggingInterceptor.Level.NONE
+    }
 
-    init {
-        httpLoggingInterceptor = HttpLoggingInterceptor(
-                HttpLoggingInterceptor.Logger { message -> Timber.v(message, TAG) })
-                .setLevel(
-                        if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
-                        else HttpLoggingInterceptor.Level.NONE)
+    companion object {
+        @JvmField
+        val TIMBER: HttpLoggingInterceptor.Logger = object : HttpLoggingInterceptor.Logger {
+            override fun log(message: String) {
+                Timber.i(message, TAG)
+            }
+        }
     }
 
     override fun intercept(chain: Interceptor.Chain): Response {

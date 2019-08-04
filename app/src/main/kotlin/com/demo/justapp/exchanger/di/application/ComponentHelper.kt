@@ -4,8 +4,8 @@ import android.content.Context
 
 object ComponentHelper {
 
-    fun <C> getComponent(context: Context, componentType: Class<C>): C {
-        return componentType.cast((context as HasComponent<C>).getComponent())
+    fun <T> getComponent(context: Context, componentType: Class<T>): T {
+        return componentType.cast((context as HasComponent<*>).getComponent())!!
     }
 
 }
