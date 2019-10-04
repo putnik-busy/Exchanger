@@ -73,7 +73,7 @@ dependencies {
 
     //testing
     testImplementation(TestingLibraryDependencies.junit)
-    testImplementation(TestingLibraryDependencies.mockitokotlin)
+    testImplementation(TestingLibraryDependencies.mockk)
     androidTestImplementation(TestingLibraryDependencies.runner)
     androidTestImplementation(TestingLibraryDependencies.espressoCore)
 }

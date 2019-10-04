@@ -1,6 +1,6 @@
 package com.demo.justapp.exchanger.di.application
 
-import com.demo.justapp.exchanger.data.api.LoggingInterceptor
+import com.demo.justapp.exchanger.data.interceptor.LoggingInterceptor
 import com.demo.justapp.exchanger.data.api.CurrencyRatesApi
 import com.google.gson.*
 import dagger.Module

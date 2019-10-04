@@ -1,4 +1,4 @@
-package com.demo.justapp.exchanger.domain
+package com.demo.justapp.exchanger.domain.interactor
 
 import com.demo.justapp.exchanger.di.scope.Currencies
 import com.demo.justapp.exchanger.domain.model.CurrencyModel

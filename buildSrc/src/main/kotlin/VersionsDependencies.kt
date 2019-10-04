@@ -28,8 +28,8 @@ object LibsVersions {
 }
 
 object TestingLibsVersions {
-    const val JUNIT_LIBRARY_VERSION = "4.12"
-    const val MOCKITO_KOTLIN_LIBRARY_VERSION = "2.1.0"
+    const val JUNIT_LIBRARY_VERSION = "5.5.2"
+    const val MOCKK_LIBRARY_VERSION = "1.9.3"
     const val RUNNER_LIBRARY_VERSION = "1.0.1"
     const val ESPRESSO_CORE_LIBRARY_VERSION = "3.1.0"
 }

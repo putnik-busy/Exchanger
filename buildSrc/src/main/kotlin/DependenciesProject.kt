@@ -39,8 +39,8 @@ object LibsDependencies {
 }
 
 object TestingLibraryDependencies {
-    const val junit = "junit:junit:${TestingLibsVersions.JUNIT_LIBRARY_VERSION}"
-    const val mockitokotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:${TestingLibsVersions.MOCKITO_KOTLIN_LIBRARY_VERSION}"
+    const val junit = "org.junit.jupiter:junit-jupiter:${TestingLibsVersions.JUNIT_LIBRARY_VERSION}"
+    const val mockk = "io.mockk:mockk:${TestingLibsVersions.MOCKK_LIBRARY_VERSION}"
     const val runner = "androidx.test:runner:${TestingLibsVersions.RUNNER_LIBRARY_VERSION}"
     const val espressoCore = "androidx.test.espresso:espresso-core:${TestingLibsVersions.ESPRESSO_CORE_LIBRARY_VERSION}"
 }

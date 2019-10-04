@@ -30,6 +30,7 @@ class CurrencyRatesViewHolder(
         if (!exchangeRateEditText.hasFocus()) {
             currencyNameTextView.text = rate.currency
             exchangeRateEditText.setText("${rate.course}")
+            exchangeRateEditText.setSelection(exchangeRateEditText.text.length)
         }
     }
 

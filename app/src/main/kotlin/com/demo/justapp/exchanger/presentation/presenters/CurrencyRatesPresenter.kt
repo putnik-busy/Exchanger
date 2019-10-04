@@ -2,7 +2,7 @@ package com.demo.justapp.exchanger.presentation.presenters
 
 import com.demo.justapp.exchanger.di.scope.Currencies
 import com.demo.justapp.exchanger.domain.CurrencyRatesCalculator
-import com.demo.justapp.exchanger.domain.CurrencyRatesInteractor
+import com.demo.justapp.exchanger.domain.interactor.CurrencyRatesInteractor
 import com.demo.justapp.exchanger.domain.model.CurrencyRate
 import com.demo.justapp.exchanger.presentation.ui.view.RatesView
 import io.reactivex.Single

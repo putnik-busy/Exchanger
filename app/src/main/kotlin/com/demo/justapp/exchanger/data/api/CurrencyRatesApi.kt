@@ -5,6 +5,9 @@ import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+/**
+ * Api загрузки валют
+ */
 interface CurrencyRatesApi {
 
     @GET("latest")

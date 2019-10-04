@@ -1,4 +1,4 @@
-package com.demo.justapp.exchanger.data.api
+package com.demo.justapp.exchanger.data.interceptor
 
 import com.demo.justapp.exchanger.BuildConfig
 import okhttp3.Interceptor

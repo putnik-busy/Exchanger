@@ -1,36 +1,37 @@
 package com.demo.justapp.exchanger.domain
 
 import com.demo.justapp.exchanger.CurrencyRatesStubDataProvider
+import com.demo.justapp.exchanger.domain.interactor.CurrencyRatesInteractor
 import com.demo.justapp.exchanger.domain.repository.CurrencyRatesRepository
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
+import io.mockk.every
+import io.mockk.impl.annotations.InjectMockKs
+import io.mockk.impl.annotations.MockK
+import io.mockk.junit5.MockKExtension
+import io.mockk.verify
 import io.reactivex.Single
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.InjectMocks
-import org.mockito.Mock
-import org.mockito.junit.MockitoJUnitRunner
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 
 private const val BASE_CURRENCY = "EUR"
 
-@RunWith(MockitoJUnitRunner::class)
+@ExtendWith(MockKExtension::class)
 class CurrencyRatesInteractorTest {
 
-    @Mock
+    @MockK
     private lateinit var repository: CurrencyRatesRepository
 
-    @InjectMocks
+    @InjectMockKs
     private lateinit var interactor: CurrencyRatesInteractor
 
     @Test
     fun `load currency rates when base currency EUR`() {
         val currencyModel = CurrencyRatesStubDataProvider.createCurrencyModel()
-        whenever(repository.loadCurrencyRates(BASE_CURRENCY)).thenReturn(Single.just(currencyModel))
+        every { repository.loadCurrencyRates(BASE_CURRENCY) } returns Single.just(currencyModel)
 
         interactor.loadCurrencyRates(BASE_CURRENCY)
-            .test()
-            .assertValue(currencyModel)
+                .test()
+                .assertValue(currencyModel)
 
-        verify(repository).loadCurrencyRates(BASE_CURRENCY)
+        verify { repository.loadCurrencyRates(BASE_CURRENCY) }
     }
 }
