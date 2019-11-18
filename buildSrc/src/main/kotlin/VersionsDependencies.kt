@@ -2,7 +2,7 @@ import org.gradle.api.JavaVersion
 
 object AndroidSdkVersions {
     const val ANDROID_COMPILE_SDK_VERSION = 29
-    const val ANDROID_MIN_SDK_VERSION = 16
+    const val ANDROID_MIN_SDK_VERSION = 19
     const val ANDROID_TARGET_SDK_VERSION = 29
     const val GRADLE_PLUGIN_VERSION = "3.5.0"
     val SOURCE_COMPATIBILITY_VERSION = JavaVersion.VERSION_1_8
