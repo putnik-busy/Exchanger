@@ -25,13 +25,12 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginStart="30dp"
-        android:autofillHints="@string/empty_rate"
         android:hint="@string/empty_rate"
         android:imeOptions="actionDone"
         android:inputType="numberDecimal"
         android:maxLength="10"
         android:textSize="20sp"
-        tools:targetApi="o"
-        tools:text="2876123,13"/>
+        tools:text="2876123,13"
+        android:importantForAutofill="no" />
 
 </LinearLayout>

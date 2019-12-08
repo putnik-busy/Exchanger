@@ -1,7 +1,7 @@
 package com.demo.justapp.exchanger.di.currencies
 
 import com.demo.justapp.exchanger.di.scope.Currencies
-import com.demo.justapp.exchanger.presentation.ui.activity.CurrencyRatesActivity
+import com.demo.justapp.exchanger.presentation.ui.activity.AppActivity
 import com.demo.justapp.exchanger.presentation.ui.fragment.CurrencyRatesFragment
 import dagger.Subcomponent
 
@@ -14,6 +14,6 @@ interface CurrenciesComponent {
         fun create(): CurrenciesComponent
     }
 
-    fun inject(activity: CurrencyRatesActivity)
+    fun inject(activity: AppActivity)
     fun inject(fragment: CurrencyRatesFragment)
 }

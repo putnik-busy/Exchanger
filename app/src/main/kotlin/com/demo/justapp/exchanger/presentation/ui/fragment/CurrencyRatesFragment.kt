@@ -7,14 +7,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.demo.justapp.exchanger.R
-import com.demo.justapp.exchanger.di.application.ComponentHelper.getComponent
 import com.demo.justapp.exchanger.di.currencies.CurrenciesComponent
 import com.demo.justapp.exchanger.domain.model.CurrencyRate
 import com.demo.justapp.exchanger.presentation.presenters.CurrencyRatesPresenter
 import com.demo.justapp.exchanger.presentation.ui.adapter.CurrencyRatesAdapter
+import com.demo.justapp.exchanger.presentation.ui.extensions.addSystemBottomPadding
+import com.demo.justapp.exchanger.presentation.ui.extensions.addSystemTopPadding
+import com.demo.justapp.exchanger.presentation.ui.extensions.getComponent
 import com.demo.justapp.exchanger.presentation.ui.extensions.hideKeyboard
+import com.demo.justapp.exchanger.presentation.ui.extensions.setAsActionBar
 import com.demo.justapp.exchanger.presentation.ui.view.RatesView
-import kotlinx.android.synthetic.main.fragment_exchanger.*
+import kotlinx.android.synthetic.main.fragment_exchanger.emptyTextView
+import kotlinx.android.synthetic.main.fragment_exchanger.loadingProgressBarView
+import kotlinx.android.synthetic.main.fragment_exchanger.recyclerVew
+import kotlinx.android.synthetic.main.fragment_exchanger.toolbar
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -36,14 +42,14 @@ class CurrencyRatesFragment : MvpAppCompatFragment(), RatesView {
     @InjectPresenter
     lateinit var presenter: CurrencyRatesPresenter
 
-    private lateinit var currencyAdapter: CurrencyRatesAdapter
+    private lateinit var adapter: CurrencyRatesAdapter
     private lateinit var recyclerListener: RecyclerView.OnScrollListener
 
     @ProvidePresenter
     fun providePresenter(): CurrencyRatesPresenter = presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        getComponent(requireActivity(), CurrenciesComponent::class.java).inject(this)
+        getComponent(CurrenciesComponent::class.java).inject(this)
         super.onCreate(savedInstanceState)
     }
 
@@ -53,6 +59,8 @@ class CurrencyRatesFragment : MvpAppCompatFragment(), RatesView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setAsActionBar(toolbar)
+        toolbar.addSystemTopPadding()
         prepareAdapter(view)
     }
 
@@ -62,7 +70,7 @@ class CurrencyRatesFragment : MvpAppCompatFragment(), RatesView {
     }
 
     override fun showRates(items: List<CurrencyRate>) {
-        currencyAdapter.items = items
+        adapter.items = items
     }
 
     override fun showProgress(loading: Boolean) {
@@ -76,16 +84,18 @@ class CurrencyRatesFragment : MvpAppCompatFragment(), RatesView {
 
     private fun prepareAdapter(view: View) {
         initScrollListener(view)
-        currencyAdapter = CurrencyRatesAdapter({ changeBaseCurrency(it) }, { changeAmountBaseCurrency(it) })
+        adapter = CurrencyRatesAdapter({ changeBaseCurrency(it) }, { changeAmountBaseCurrency(it) })
         with(recyclerVew) {
-            adapter = currencyAdapter
+            addSystemBottomPadding()
+            adapter = this@CurrencyRatesFragment.adapter
+            setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             addOnScrollListener(recyclerListener)
         }
     }
 
     private fun changeBaseCurrency(adapterPosition: Int) {
-        presenter.onChangeDefaultCurrency(currencyAdapter.items[adapterPosition])
+        presenter.onChangeDefaultCurrency(adapter.items[adapterPosition])
     }
 
     private fun changeAmountBaseCurrency(course: String) {
